@@ -466,7 +466,7 @@
         document.getElementById('filter-subject').disabled = false;
     }
 
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytzXsHyaVGmSWIoypqLBfpS0cJoQly0c6KyqV3gvYmN7Mhs_bYj2n5HOyg93Mo7RcP/exec';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyam1LPuzycXTwOj_4ANdSSWDWN7ofzNhFfqTHmmCoIqj8F-Ekdr0dgbE_QpcRzqawH/exec';
 
     function getLocalNotes() {
         return JSON.parse(localStorage.getItem('incloud_notes') || '[]');
@@ -576,7 +576,7 @@
         let fileUpload = false;
 
         if (uploadMode === 'file' && file) {
-            noteLink = await readFileAsDataURL(file);
+            noteLink = '';
             fileName = file.name;
             fileUpload = true;
         }
@@ -590,7 +590,8 @@
             icon,
             date: new Date().toLocaleDateString(),
             fileUpload,
-            fileName
+            fileName,
+            fileBase64: (fileUpload && file) ? await readFileAsDataURL(file) : null
         };
 
         const savedOnServer = await postNoteToServer(newNote);

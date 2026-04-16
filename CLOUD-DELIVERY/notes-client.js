@@ -1,4 +1,4 @@
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytzXsHyaVGmSWIoypqLBfpS0cJoQly0c6KyqV3gvYmN7Mhs_bYj2n5HOyg93Mo7RcP/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyam1LPuzycXTwOj_4ANdSSWDWN7ofzNhFfqTHmmCoIqj8F-Ekdr0dgbE_QpcRzqawH/exec';
 
 async function fetchNotesFromServer() {
     try {
