@@ -242,6 +242,10 @@
             100% { opacity: 0; }
         }
 
+        .upload-toggle { display: flex; gap: 0; margin-bottom: 15px; border-radius: 10px; overflow: hidden; border: 1px solid rgba(247,140,37,0.3); width: fit-content; }
+        .upload-toggle button { padding: 9px 22px; background: transparent; border: none; color: #aaa; font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .upload-toggle button.active { background: #F78C25; color: #fff; }
+
         .stats-row {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -337,14 +341,20 @@
                 <span class="error-msg" id="titleErr">Please enter a title</span>
             </div>
             <div class="form-group full">
-                <label>File Link (Google Drive / Adobe / Any URL)</label>
-                <input type="url" id="f-link" placeholder="https://drive.google.com/...">
-                <span class="error-msg" id="linkErr">Please paste a valid link</span>
-            </div>
-            <div class="form-group full" style="display:none">
-                <label>Choose File</label>
-                <input type="file" id="f-file" accept=".pdf,.doc,.docx,.ppt,.pptx,.txt,image/*">
-                <span class="error-msg" id="fileErr">Please choose a file or paste a valid link</span>
+                <div class="upload-toggle">
+                    <button id="toggle-link" class="active" onclick="switchMode('link')">🔗 Paste Link</button>
+                    <button id="toggle-file" onclick="switchMode('file')">📁 Choose File</button>
+                </div>
+                <div id="mode-link">
+                    <label>File Link (Google Drive / Adobe / Any URL)</label>
+                    <input type="url" id="f-link" placeholder="https://drive.google.com/...">
+                    <span class="error-msg" id="linkErr">Please paste a valid link</span>
+                </div>
+                <div id="mode-file" style="display:none">
+                    <label>Choose File</label>
+                    <input type="file" id="f-file" accept=".pdf,.doc,.docx,.ppt,.pptx,.txt,image/*">
+                    <span class="error-msg" id="fileErr">Please choose a file</span>
+                </div>
             </div>
             <div class="form-group">
                 <label>Icon (emoji)</label>
@@ -524,6 +534,16 @@
         }
     }
 
+    let uploadMode = 'link';
+
+    function switchMode(mode) {
+        uploadMode = mode;
+        document.getElementById('mode-link').style.display = mode === 'link' ? '' : 'none';
+        document.getElementById('mode-file').style.display = mode === 'file' ? '' : 'none';
+        document.getElementById('toggle-link').classList.toggle('active', mode === 'link');
+        document.getElementById('toggle-file').classList.toggle('active', mode === 'file');
+    }
+
     async function addNote() {
         const subject = document.getElementById('f-subject').value;
         const unit    = document.getElementById('f-unit').value;
@@ -540,17 +560,24 @@
         let valid = true;
         if (!subject) { document.getElementById('subjectErr').style.display = 'block'; valid = false; }
         if (!title) { document.getElementById('titleErr').textContent = 'Please enter a title'; document.getElementById('titleErr').style.display = 'block'; valid = false; }
-        if (!link) { document.getElementById('linkErr').style.display = 'block'; valid = false; }
-        if (link) {
-            try { new URL(link); } catch (err) {
-                document.getElementById('linkErr').style.display = 'block'; valid = false;
-            }
+
+        if (uploadMode === 'link') {
+            if (!link) { document.getElementById('linkErr').style.display = 'block'; valid = false; }
+            else { try { new URL(link); } catch (e) { document.getElementById('linkErr').style.display = 'block'; valid = false; } }
+        } else {
+            if (!file) { document.getElementById('fileErr').style.display = 'block'; valid = false; }
         }
         if (!valid) return;
 
-        const noteLink = link;
-        const fileName = null;
-        const fileUpload = false;
+        let noteLink = link;
+        let fileName = null;
+        let fileUpload = false;
+
+        if (uploadMode === 'file' && file) {
+            noteLink = await readFileAsDataURL(file);
+            fileName = file.name;
+            fileUpload = true;
+        }
 
         const newNote = {
             id: Date.now(),
