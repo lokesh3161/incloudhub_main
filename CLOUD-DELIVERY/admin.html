@@ -466,7 +466,7 @@
         document.getElementById('filter-subject').disabled = false;
     }
 
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx3X6imWGGJCe7XldYOtU2Ztl0yemmUzpYv7XcUTWJffGp63I14WMtZqBsjA19NqFWI/exec';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbykSgV6Q6CncMUeV-4JSgv7Cck_2JxhEuwh6JXLplxMDy5PtRqEyqtPnDq-px6Dx_C1/exec';
 
     function getLocalNotes() {
         return JSON.parse(localStorage.getItem('incloud_notes') || '[]');
@@ -501,18 +501,35 @@
         });
     }
 
-    async function postNoteToServer(note) {
-        try {
-            await fetch(APPS_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: JSON.stringify(note)
-            });
-            return true;
-        } catch (err) {
-            console.error('postNoteToServer failed:', err);
-            return false;
-        }
+    function postNoteToServer(note) {
+        return new Promise((resolve) => {
+            const iframe = document.createElement('iframe');
+            iframe.name = 'hidden_iframe';
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = APPS_SCRIPT_URL;
+            form.target = 'hidden_iframe';
+            form.style.display = 'none';
+
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'payload';
+            input.value = JSON.stringify(note);
+            form.appendChild(input);
+            document.body.appendChild(form);
+
+            iframe.onload = () => {
+                document.body.removeChild(form);
+                document.body.removeChild(iframe);
+                resolve(true);
+            };
+
+            setTimeout(() => resolve(true), 8000);
+            form.submit();
+        });
     }
 
     async function deleteNoteFromServer(id) {
