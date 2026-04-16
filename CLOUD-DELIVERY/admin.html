@@ -466,7 +466,7 @@
         document.getElementById('filter-subject').disabled = false;
     }
 
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyOiPljeEEYaa5EJskrPnrufxkeVl9FX8r6F9P-CVHY5rQvm9YaRYFIKb13reVKBlDU/exec';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytzXsHyaVGmSWIoypqLBfpS0cJoQly0c6KyqV3gvYmN7Mhs_bYj2n5HOyg93Mo7RcP/exec';
 
     function getLocalNotes() {
         return JSON.parse(localStorage.getItem('incloud_notes') || '[]');
@@ -503,8 +503,10 @@
 
     async function postNoteToServer(note) {
         try {
-            const url = APPS_SCRIPT_URL + '?action=add&data=' + encodeURIComponent(JSON.stringify(note));
-            const res = await fetch(url);
+            const res = await fetch(APPS_SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify(note)
+            });
             const json = await res.json();
             if (!json.ok) throw new Error('Server returned not ok');
             return true;
