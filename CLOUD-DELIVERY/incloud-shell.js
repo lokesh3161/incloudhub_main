@@ -1,31 +1,42 @@
 /**
  * MEDHAS — Global Application Shell & Intro Engine
- * Brand: MEDHAS (Learn. Think. Build.)
+ * Brand: MEDHAS (Your first year, figured out.)
  */
 
-// Global Searchable Resource Index
+// Global Searchable Resource Index across Academics, AI Hub, and Career
 const ICH_SEARCH_INDEX = [
-    { id: "1styearmaths", title: "Mathematics", category: "Academics", url: "1styearmaths.html", icon: "📐", meta: "Matrices, Calculus, Vectors & ODE • 1st Year" },
-    { id: "1styearphysics", title: "Applied Physics", category: "Academics", url: "1styearphysics.html", icon: "⚛️", meta: "Optics, Quantum Mechanics & Lasers • 1st Year" },
-    { id: "1styearchemistry", title: "Engineering Chemistry", category: "Academics", url: "1styearchemistry.html", icon: "🧪", meta: "Polymers, Water Tech & Electrochemistry • 1st Year" },
-    { id: "1styearbeee", title: "BEEE — Basic Electrical", category: "Academics", url: "1styearbeee.html", icon: "⚡", meta: "AC/DC Circuits, Machines & Diodes • 1st Year" },
-    { id: "1styearclanguage", title: "C Programming", category: "Academics", url: "1styearclanguage.html", icon: "💻", meta: "Pointers, Structures, Arrays & Functions • 1st Year" },
-    { id: "1styeardatastructures", title: "Data Structures & Algorithms", category: "Academics", url: "1styeardatastructures.html", icon: "🌳", meta: "Linked Lists, Stacks, Queues, Trees & Graphs • 1st Year" },
-    { id: "1styearenglish", title: "Communicative English", category: "Academics", url: "1styearenglish.html", icon: "📖", meta: "Grammar, Vocabulary & Report Writing • 1st Year" },
-    { id: "1styearbcme", title: "BCME — Basic Civil & Mech", category: "Academics", url: "1styearbcme.html", icon: "🏗️", meta: "Surveying, Materials & IC Engines • 1st Year" },
-    { id: "first-year", title: "1st Year All Subjects Hub", category: "Academics", url: "first-year.html", icon: "📚", meta: "Complete 1st Year Foundation Directory" },
-    { id: "select-year", title: "Academic Year Selection", category: "Academics", url: "select-year.html", icon: "🎓", meta: "1st, 2nd, 3rd, 4th Year Curriculum" },
-    { id: "dept-cse", title: "Computer Science (CSE)", category: "Departments", url: "select-year.html", icon: "💻", meta: "CSE Curriculum & Year Materials" },
-    { id: "dept-aids", title: "AI & Data Science (AIDS)", category: "Departments", url: "select-year.html", icon: "⚛️", meta: "AIDS Curriculum & Year Materials" },
-    { id: "dept-aiml", title: "AI & Machine Learning (AIML)", category: "Departments", url: "select-year.html", icon: "🤖", meta: "AIML Curriculum & Year Materials" },
-    { id: "dept-ece", title: "Electronics (ECE)", category: "Departments", url: "select-year.html", icon: "📡", meta: "ECE Curriculum & Year Materials" },
-    { id: "dept-it", title: "Information Technology (IT)", category: "Departments", url: "select-year.html", icon: "🌐", meta: "IT Curriculum & Year Materials" },
-    { id: "dept-mech", title: "Mechanical Engineering (MECH)", category: "Departments", url: "select-year.html", icon: "⚙️", meta: "MECH Curriculum & Year Materials" },
-    { id: "dept-civil", title: "Civil Engineering (CIVIL)", category: "Departments", url: "select-year.html", icon: "🏗️", meta: "CIVIL Curriculum & Year Materials" },
-    { id: "dept-eee", title: "Electrical Engineering (EEE)", category: "Departments", url: "select-year.html", icon: "🔌", meta: "EEE Curriculum & Year Materials" },
-    { id: "ai-hub", title: "MEDHAS AI Hub — Student Tools", category: "AI Tools", url: "ai-hub.html", icon: "🤖", meta: "NotebookLM, ChatGPT, Claude, Perplexity & v0" },
-    { id: "attendance", title: "Attendance & Bunk Calculator", category: "Utilities", url: "attendance.html", icon: "📊", meta: "Track 75%/80% Eligibility & Safe Leaves" },
-    { id: "admin", title: "MEDHAS Admin & Faculty Portal", category: "Utilities", url: "admin.html", icon: "🔐", meta: "Upload & Manage Notes for Students" }
+    // --- ACADEMICS: 1ST YEAR SUBJECTS ---
+    { id: "1styearmaths", title: "Mathematics", category: "Academics", url: "1styearmaths.html", icon: "📐", meta: "Matrices, Calculus, Vectors & Differential Equations • 1st Year Core" },
+    { id: "1styearphysics", title: "Applied Physics", category: "Academics", url: "1styearphysics.html", icon: "⚛️", meta: "Optics, Quantum Mechanics & Lasers • 1st Year Core" },
+    { id: "1styearchemistry", title: "Engineering Chemistry", category: "Academics", url: "1styearchemistry.html", icon: "🧪", meta: "Polymers, Water Tech & Electrochemistry • 1st Year Core" },
+    { id: "1styearbeee", title: "BEEE — Basic Electrical & Electronics", category: "Academics", url: "1styearbeee.html", icon: "⚡", meta: "AC/DC Circuits, Machines & Semiconductor Diodes • 1st Year Core" },
+    { id: "1styearclanguage", title: "C Programming", category: "Academics", url: "1styearclanguage.html", icon: "💻", meta: "Pointers, Structures, Arrays & Functions • 1st Year Core" },
+    { id: "1styeardatastructures", title: "Data Structures & Algorithms", category: "Academics", url: "1styeardatastructures.html", icon: "🌳", meta: "Linked Lists, Stacks, Queues, Trees & Graphs • 1st Year Core" },
+    { id: "1styearenglish", title: "Communicative English", category: "Academics", url: "1styearenglish.html", icon: "📖", meta: "Grammar, Technical Vocabulary & Report Writing • 1st Year Core" },
+    { id: "1styearbcme", title: "BCME — Basic Civil & Mechanical", category: "Academics", url: "1styearbcme.html", icon: "🏗️", meta: "Surveying, Materials & IC Engines • 1st Year Core" },
+    { id: "first-year", title: "1st Year Academics Hub", category: "Academics", url: "first-year.html", icon: "📚", meta: "1st Year Core Subjects, Notes & Question Papers" },
+    { id: "select-year", title: "All Academic Years", category: "Academics", url: "select-year.html", icon: "🎓", meta: "1st, 2nd, 3rd, 4th Year Curriculum Directory" },
+
+    // --- AI HUB: TASK SHORTCUTS & TOOLS ---
+    { id: "ai-concept", title: "AI: Concept Simplifier", category: "AI Tools", url: "ai-hub.html?task=study", icon: "🧠", meta: "Explain complex engineering topics with simple analogies (NotebookLM / Claude)" },
+    { id: "ai-debug", title: "AI: Code Debugger & Explainer", category: "AI Tools", url: "ai-hub.html?task=coding", icon: "🐛", meta: "Find bugs, dry-run algorithms & explain syntax errors (ChatGPT / Claude)" },
+    { id: "ai-exam", title: "AI: 10-Mark Exam Question Generator", category: "AI Tools", url: "ai-hub.html?task=study", icon: "📝", meta: "Generate probable university exam questions from syllabus (ChatGPT / Gemini)" },
+    { id: "ai-notes", title: "AI: Lecture Notes Summarizer", category: "AI Tools", url: "ai-hub.html?task=study", icon: "📑", meta: "Condense long textbook chapters into crisp bullet points (NotebookLM)" },
+    { id: "ai-research", title: "AI: Literature & Topic Explorer", category: "AI Tools", url: "ai-hub.html?task=research", icon: "🔍", meta: "Explore research topics & paper summaries with citations (Perplexity)" },
+    { id: "ai-presentation", title: "AI: Presentation Slide Outliner", category: "AI Tools", url: "ai-hub.html?task=presentations", icon: "📊", meta: "Draft 5-minute technical seminar presentations (ChatGPT / Claude)" },
+    { id: "ai-hub-main", title: "MEDHAS AI Hub — Task Directory", category: "AI Tools", url: "ai-hub.html", icon: "🤖", meta: "Explore all AI tasks for Study, Coding, Writing & Research" },
+
+    // --- CAREER: LINKEDIN STARTER TEMPLATES ---
+    { id: "career-headline", title: "Career: LinkedIn Headline Builder", category: "Career", url: "career.html#headline", icon: "💼", meta: "Craft a high-converting first-year engineering headline" },
+    { id: "career-about", title: "Career: About Section Narrative", category: "Career", url: "career.html#about", icon: "✍️", meta: "Write a compelling bio highlighting your curiosity & tech focus" },
+    { id: "career-firstpost", title: "Career: First LinkedIn Post Template", category: "Career", url: "career.html#first-post", icon: "🚀", meta: "Introduce yourself, your college journey & learning goals" },
+    { id: "career-networking", title: "Career: Senior Outreach Message", category: "Career", url: "career.html#networking", icon: "🤝", meta: "Polite message template to connect with seniors & alumni" },
+    { id: "career-project", title: "Career: Project Showcase Template", category: "Career", url: "career.html#project", icon: "🛠️", meta: "Turn your mini-project or code repo into a professional post" },
+    { id: "career-main", title: "MEDHAS Career & LinkedIn Starter", category: "Career", url: "career.html", icon: "🌟", meta: "Build your professional identity from your first year" },
+
+    // --- UTILITIES ---
+    { id: "attendance", title: "Attendance & Bunk Calculator", category: "Utilities", url: "attendance.html", icon: "📊", meta: "Calculate 75% eligibility & safe leaves" },
+    { id: "profile", title: "Student Profile & Session", category: "Utilities", url: "profile.html", icon: "👤", meta: "View enrolled department, registration details & settings" }
 ];
 
 let selectedSearchIndex = 0;
@@ -54,67 +65,70 @@ function getRecentSubjects() {
 }
 
 /**
- * MEDHAS Premium Intro Animation Initializer
- * Plays on first session entry (~1.8s) or on demand when forced.
+ * Global Copy-to-Clipboard with Toast Notification
  */
-function initMedhasIntro(force = false) {
-    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const shouldForce = force || urlParams.has('intro') || urlParams.has('replay');
-
-    // Check if intro has already played in this browser session
-    if (!shouldForce && sessionStorage.getItem('medhas_intro_seen') === 'true') {
-        return;
+window.copyToClipboard = function(text, btnElement, feedbackMsg = 'Copied!') {
+    if (!text) return;
+    
+    // Immediate UI feedback
+    showToast(feedbackMsg);
+    if (btnElement) {
+        const originalText = btnElement.innerHTML;
+        btnElement.classList.add('copied');
+        btnElement.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <span>${feedbackMsg}</span>`;
+        setTimeout(() => {
+            btnElement.classList.remove('copied');
+            btnElement.innerHTML = originalText;
+        }, 2000);
     }
 
-    const existing = document.getElementById('medhas-intro-overlay');
-    if (existing && existing.parentNode) {
-        existing.parentNode.removeChild(existing);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(() => {
+            // Fallback for non-secure / headless contexts
+            try {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+            } catch(e) {}
+        });
+    } else {
+        try {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+        } catch(e) {}
     }
-
-    const introHTML = `
-    <div id="medhas-intro-overlay" role="presentation" aria-hidden="true">
-        <div class="medhas-intro-content">
-            <div class="medhas-core-symbol">
-                <div class="medhas-orbit-ring"></div>
-                <div class="medhas-orbit-ring-inner"></div>
-                <div class="medhas-core-node">M</div>
-            </div>
-            <div class="medhas-intro-brand">
-                MED<span>HAS</span>
-            </div>
-            <div class="medhas-intro-tagline">
-                Learn. Think. Build.
-            </div>
-        </div>
-    </div>
-    `;
-
-    document.body.insertAdjacentHTML('beforeend', introHTML);
-    const overlay = document.getElementById('medhas-intro-overlay');
-
-    sessionStorage.setItem('medhas_intro_seen', 'true');
-
-    // Smooth transition out at ~1.8 seconds
-    setTimeout(() => {
-        if (overlay) {
-            overlay.classList.add('medhas-intro-exit');
-            setTimeout(() => {
-                if (overlay && overlay.parentNode) {
-                    overlay.parentNode.removeChild(overlay);
-                }
-            }, 500);
-        }
-    }, 1800);
-}
-
-// Global hook to manually replay intro animation anytime
-window.replayMedhasIntro = function() {
-    initMedhasIntro(true);
 };
 
+function showToast(message) {
+    let toast = document.getElementById('medhas-global-toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'medhas-global-toast';
+        toast.className = 'medhas-toast';
+        document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(toast._timeout);
+    toast._timeout = setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2400);
+}
+
+/**
+ * MEDHAS Application Shell Navigation
+ */
 function renderGlobalNav(activePage = 'home') {
     const user = typeof getAuthSession === 'function' ? getAuthSession() : null;
     const userName = user && user.name ? user.name : 'Student';
@@ -124,10 +138,10 @@ function renderGlobalNav(activePage = 'home') {
     const navHTML = `
     <nav class="ich-navbar" id="ich-global-nav">
         <div class="ich-container ich-nav-inner">
-            <a href="home.html" class="ich-brand">
+            <a href="home.html" class="ich-brand" title="MEDHAS — Your first year, figured out.">
                 <div class="ich-brand-logo">M</div>
                 <div class="ich-brand-text">MED<span>HAS</span></div>
-                <span class="ich-brand-badge">STUDENT HUB</span>
+                <span class="ich-brand-badge">FIRST-YEAR HUB</span>
             </a>
 
             <div class="ich-nav-links">
@@ -135,78 +149,75 @@ function renderGlobalNav(activePage = 'home') {
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                     Home
                 </a>
-                <a href="select-year.html" class="ich-nav-item ${activePage === 'academics' ? 'active' : ''}">
+                <a href="first-year.html" class="ich-nav-item ${activePage === 'academics' ? 'active' : ''}">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
                     Academics
                 </a>
                 <a href="ai-hub.html" class="ich-nav-item ${activePage === 'ai' ? 'active' : ''}">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="M2 12h4"/><path d="m4.93 19.07 2.83-2.83"/><path d="M12 22v-4"/><path d="m19.07 19.07-2.83-2.83"/><path d="M22 12h-4"/><path d="m19.07 4.93-2.83 2.83"/><circle cx="12" cy="12" r="3"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="M2 12h4"/><path d="m4.93 19.07 2.83-2.83"/><path d="M12 22v-4"/><path d="m19.07 19.07-2.83-2.83"/><path d="M22 12h-4"/><path d="m19.07 4.93-2.83 2.83"/></svg>
                     AI Hub
                 </a>
-                <a href="attendance.html" class="ich-nav-item ${activePage === 'attendance' ? 'active' : ''}">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                    Attendance
+                <a href="career.html" class="ich-nav-item ${activePage === 'career' ? 'active' : ''}">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    Career
                 </a>
             </div>
 
             <div class="ich-nav-actions">
                 <button class="ich-search-trigger" onclick="openSearchModal()" title="Search (Ctrl+K)">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                    <span>Search notes, subjects...</span>
+                    <span>Search notes, AI tools, career...</span>
                     <span class="ich-kbd">⌘K</span>
                 </button>
 
-                <div class="ich-user-pill">
+                <a href="profile.html" class="ich-user-pill ${activePage === 'profile' ? 'active-profile' : ''}" title="View Student Profile">
                     <div class="ich-user-avatar">${userInitial}</div>
                     <div class="ich-user-details">
                         <span class="ich-user-name">${userName}</span>
                         <span class="ich-user-meta">${userBranch}</span>
                     </div>
-                    <button class="ich-logout-btn" onclick="handleLogout()" title="Log out">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
-                    </button>
-                </div>
+                </a>
             </div>
         </div>
     </nav>
 
-    <!-- Mobile Bottom Navigation Bar -->
+    <!-- Mobile Bottom Navigation Bar (5-Pillar Touch Targets) -->
     <div class="ich-mobile-bottom-nav">
         <a href="home.html" class="ich-mobile-nav-item ${activePage === 'home' ? 'active' : ''}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             <span>Home</span>
         </a>
-        <a href="select-year.html" class="ich-mobile-nav-item ${activePage === 'academics' ? 'active' : ''}">
+        <a href="first-year.html" class="ich-mobile-nav-item ${activePage === 'academics' ? 'active' : ''}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/></svg>
-            <span>Study</span>
+            <span>Academics</span>
         </a>
         <a href="ai-hub.html" class="ich-mobile-nav-item ${activePage === 'ai' ? 'active' : ''}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/></svg>
             <span>AI Hub</span>
         </a>
-        <a href="attendance.html" class="ich-mobile-nav-item ${activePage === 'attendance' ? 'active' : ''}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-            <span>Attendance</span>
+        <a href="career.html" class="ich-mobile-nav-item ${activePage === 'career' ? 'active' : ''}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <span>Career</span>
         </a>
-        <a href="javascript:void(0)" onclick="openSearchModal()" class="ich-mobile-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <span>Search</span>
+        <a href="profile.html" class="ich-mobile-nav-item ${activePage === 'profile' ? 'active' : ''}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Profile</span>
         </a>
     </div>
 
-    <!-- Enhanced Global Search Modal -->
+    <!-- Global Command Search Modal -->
     <div class="ich-modal-backdrop" id="ich-search-modal" onclick="if(event.target === this) closeSearchModal()">
         <div class="ich-search-modal">
             <div class="ich-search-input-wrap">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ich-primary)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                <input type="text" id="ich-search-field" class="ich-search-input" placeholder="Search notes, subjects, papers, AI tools..." oninput="handleSearchQuery(this.value)" autocomplete="off">
+                <input type="text" id="ich-search-field" class="ich-search-input" placeholder="Search notes, subjects, AI tasks, LinkedIn prompts..." oninput="handleSearchQuery(this.value)" autocomplete="off">
                 <button class="ich-btn ich-btn-ghost ich-btn-sm" onclick="closeSearchModal()">Esc</button>
             </div>
             <div class="ich-search-filter-chips">
                 <button class="ich-search-chip active" onclick="setSearchFilter('all', this)">All</button>
-                <button class="ich-search-chip" onclick="setSearchFilter('Academics', this)">Notes & Subjects</button>
-                <button class="ich-search-chip" onclick="setSearchFilter('AI Tools', this)">AI Tools</button>
-                <button class="ich-search-chip" onclick="setSearchFilter('Departments', this)">Departments</button>
+                <button class="ich-search-chip" onclick="setSearchFilter('Academics', this)">Academics</button>
+                <button class="ich-search-chip" onclick="setSearchFilter('AI Tools', this)">AI Hub</button>
+                <button class="ich-search-chip" onclick="setSearchFilter('Career', this)">Career</button>
                 <button class="ich-search-chip" onclick="setSearchFilter('Utilities', this)">Utilities</button>
             </div>
             <div class="ich-search-results" id="ich-search-results-list">
@@ -228,15 +239,16 @@ function renderGlobalFooter(mountId = 'ich-footer-mount') {
     const footerHTML = `
     <footer class="ich-footer">
         <div class="ich-container">
-            <div style="font-weight: 800; color: #FFF; margin-bottom: 4px; letter-spacing: 0.05em;">MEDHAS — Learn. Think. Build.</div>
-            <div>Unified Campus Knowledge Platform • Designed for 1,800+ College Students</div>
+            <div style="font-weight: 800; color: #FFF; margin-bottom: 4px; letter-spacing: 0.05em;">MEDHAS — Your first year, figured out.</div>
+            <div style="color: var(--ich-text-secondary); font-size: 0.88rem; margin-bottom: 12px;">Academics • AI Productivity • Career Starter for First-Year Engineering Students</div>
             <div class="ich-footer-links">
-                <a href="home.html">Dashboard</a>
-                <a href="select-year.html">Academics</a>
+                <a href="home.html">Home</a>
+                <a href="first-year.html">Academics</a>
                 <a href="ai-hub.html">AI Hub</a>
+                <a href="career.html">Career</a>
                 <a href="attendance.html">Attendance</a>
-                <a href="admin.html">Faculty Portal</a>
-                <a href="mailto:thanalalokesh5@gmail.com">Contact Support</a>
+                <a href="profile.html">Profile</a>
+                <a href="admin.html">Faculty Upload</a>
             </div>
         </div>
     </footer>
@@ -351,8 +363,8 @@ function handleSearchQuery(query) {
         container.innerHTML = `
             <div style="text-align: center; padding: 36px 12px; color: var(--ich-text-muted);">
                 <div style="font-size: 2rem; margin-bottom: 8px;">🔍</div>
-                <div style="font-weight: 600; color: #FFF; margin-bottom: 4px;">No matching results</div>
-                <div style="font-size: 0.85rem;">Try searching for a subject like "Maths", "Physics", or tool like "AI Hub"</div>
+                <div style="font-weight: 600; color: #FFF; margin-bottom: 4px;">No matching results found</div>
+                <div style="font-size: 0.85rem; color: var(--ich-text-secondary);">Try searching for a subject like "Maths", "Data Structures", an AI task like "Debug code", or a LinkedIn prompt.</div>
             </div>
         `;
         return;
@@ -371,6 +383,7 @@ function handleSearchQuery(query) {
         items.forEach(item => {
             const isSelected = globalIdx === selectedSearchIndex;
             const highlightedTitle = highlightMatch(item.title, q);
+            const badgeClass = catName === 'Academics' ? 'ich-badge-orange' : (catName === 'AI Tools' ? 'ich-badge-blue' : 'ich-badge-gray');
             html += `
                 <a href="${item.url}" class="ich-search-result-item ${isSelected ? 'selected' : ''}" data-index="${globalIdx}" onclick="closeSearchModal()">
                     <div style="display: flex; align-items: center; gap: 12px;">
@@ -380,7 +393,7 @@ function handleSearchQuery(query) {
                             <div class="ich-search-result-subtitle">${escapeHtml(item.meta)}</div>
                         </div>
                     </div>
-                    <span class="ich-badge ${item.category === 'Academics' ? 'ich-badge-orange' : 'ich-badge-gray'}">${item.category}</span>
+                    <span class="ich-badge ${badgeClass}">${item.category}</span>
                 </a>
             `;
             globalIdx++;
@@ -443,8 +456,3 @@ function updateSearchSelection(items) {
         }
     });
 }
-
-// Automatically trigger intro if first visit in this session
-window.addEventListener('DOMContentLoaded', () => {
-    initMedhasIntro();
-});

@@ -3,37 +3,39 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>MEDHAS — Dashboard</title>
+    <title>MEDHAS — First-Year Student Hub</title>
     <link rel="stylesheet" href="incloud-design.css">
     <script src="auth.js"></script>
     <script>requireAuth();</script>
     <style>
+        /* Hero Section */
         .hero-banner {
-            background: linear-gradient(135deg, rgba(247, 140, 37, 0.12) 0%, rgba(19, 23, 31, 0.85) 100%);
-            border: 1px solid var(--ich-border-accent);
+            background: linear-gradient(135deg, rgba(247, 140, 37, 0.08) 0%, #FFFFFF 100%);
+            border: 1px solid var(--ich-border-subtle);
             border-radius: var(--ich-radius-xl);
             padding: 36px 32px;
             margin-bottom: 32px;
             position: relative;
             overflow: hidden;
+            box-shadow: var(--ich-shadow-sm);
         }
 
         .hero-banner::after {
             content: '';
             position: absolute;
-            top: -50%;
+            top: -40%;
             right: -10%;
             width: 320px;
             height: 320px;
-            background: radial-gradient(circle, rgba(247, 140, 37, 0.2) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(247, 140, 37, 0.12) 0%, transparent 70%);
             pointer-events: none;
         }
 
         .hero-greeting {
-            font-size: 1.95rem;
+            font-size: 2.1rem;
             font-weight: 800;
-            color: #FFF;
-            margin-bottom: 8px;
+            color: var(--ich-text-primary);
+            margin-bottom: 6px;
             letter-spacing: -0.02em;
         }
 
@@ -44,66 +46,84 @@
         .hero-tagline {
             color: var(--ich-text-secondary);
             font-size: 0.95rem;
-            max-width: 620px;
+            max-width: 600px;
             margin-bottom: 24px;
+            line-height: 1.6;
         }
 
-        .hero-actions {
+        /* Hero Command Search Bar */
+        .hero-search-box {
+            background: #FFFFFF;
+            border: 1px solid var(--ich-border-accent);
+            border-radius: var(--ich-radius-lg);
+            padding: 12px 18px;
             display: flex;
             align-items: center;
             gap: 12px;
-            flex-wrap: wrap;
+            cursor: pointer;
+            transition: all var(--ich-transition-fast);
+            max-width: 640px;
+            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+        }
+
+        .hero-search-box:hover {
+            border-color: var(--ich-primary);
+            background: #FFFFFF;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(247, 140, 37, 0.15);
+        }
+
+        .hero-search-placeholder {
+            color: var(--ich-text-muted);
+            font-size: 0.92rem;
+            flex-grow: 1;
         }
 
         /* Enrolled Department Spotlight */
-        .my-branch-box {
+        .dept-context-bar {
             background: var(--ich-surface-1);
-            border: 1px solid var(--ich-border-accent);
-            border-radius: var(--ich-radius-xl);
-            padding: 24px 28px;
+            border: 1px solid var(--ich-border-subtle);
+            border-radius: var(--ich-radius-lg);
+            box-shadow: var(--ich-shadow-sm);
+            padding: 16px 24px;
             margin-bottom: 32px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 16px;
         }
 
-        .branch-info-title {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: #FFF;
+        .dept-context-info {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .year-pills-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .year-pill-btn {
-            background: var(--ich-surface-2);
-            border: 1px solid var(--ich-border-medium);
-            padding: 8px 16px;
-            border-radius: var(--ich-radius-full);
-            color: #FFF;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: all var(--ich-transition-fast);
-        }
-
-        .year-pill-btn:hover {
+        .dept-context-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--ich-radius-md);
             background: var(--ich-primary-light);
-            border-color: var(--ich-primary);
             color: var(--ich-primary);
-            transform: translateY(-1px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
         }
 
+        .dept-context-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--ich-text-primary);
+        }
+
+        .dept-context-sub {
+            font-size: 0.8rem;
+            color: var(--ich-text-muted);
+        }
+
+        /* Section Layouts */
         .section-header {
             display: flex;
             align-items: center;
@@ -112,145 +132,165 @@
         }
 
         .section-title {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            color: #FFF;
+            color: var(--ich-text-primary);
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
         .section-title-icon {
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             border-radius: var(--ich-radius-sm);
             background: var(--ich-primary-light);
             color: var(--ich-primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 15px;
         }
 
-        /* Quick Access Cards */
-        .quick-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 16px;
-            margin-bottom: 36px;
-        }
-
-        .quick-card {
-            background: var(--ich-surface-1);
-            border: 1px solid var(--ich-border-subtle);
-            border-radius: var(--ich-radius-lg);
-            padding: 22px;
-            text-decoration: none;
-            color: #FFF;
-            transition: all var(--ich-transition-base);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .quick-card:hover {
-            border-color: var(--ich-border-accent);
-            transform: translateY(-3px);
-            box-shadow: var(--ich-shadow-md), var(--ich-shadow-glow);
-        }
-
-        .quick-icon {
-            font-size: 1.8rem;
-            margin-bottom: 14px;
-        }
-
-        .quick-title {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: #FFF;
-            margin-bottom: 4px;
-        }
-
-        .quick-desc {
-            font-size: 0.82rem;
-            color: var(--ich-text-muted);
-        }
-
-        /* Departments Grid */
-        .dept-grid {
+        /* Academic Subject Grid */
+        .academic-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 16px;
             margin-bottom: 36px;
         }
 
-        .dept-card {
+        .academic-card {
             background: var(--ich-surface-1);
             border: 1px solid var(--ich-border-subtle);
             border-radius: var(--ich-radius-lg);
+            box-shadow: var(--ich-shadow-sm);
             padding: 22px;
             text-decoration: none;
-            color: #FFF;
+            color: var(--ich-text-primary);
             transition: all var(--ich-transition-base);
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-        }
-
-        .dept-card:hover {
-            border-color: var(--ich-border-accent);
-            background: var(--ich-surface-2);
-            transform: translateY(-3px);
-            box-shadow: var(--ich-shadow-md);
-        }
-
-        .dept-badge-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: var(--ich-radius-md);
-            background: var(--ich-surface-2);
-            border: 1px solid var(--ich-border-medium);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            flex-shrink: 0;
-            transition: background var(--ich-transition-fast);
-        }
-
-        .dept-card:hover .dept-badge-icon {
-            background: var(--ich-primary-light);
-            border-color: var(--ich-primary);
-        }
-
-        .dept-name {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--ich-primary);
-            margin-bottom: 2px;
-        }
-
-        .dept-fullname {
-            font-size: 0.82rem;
-            color: var(--ich-text-secondary);
-        }
-
-        /* Ecosystem Grid */
-        .ecosystem-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .feature-box {
-            background: var(--ich-surface-1);
-            border: 1px solid var(--ich-border-subtle);
-            border-radius: var(--ich-radius-xl);
-            padding: 28px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+        }
+
+        .academic-card:hover {
+            border-color: var(--ich-border-accent);
+            background: var(--ich-surface-1);
+            transform: translateY(-3px);
+            box-shadow: var(--ich-shadow-md), var(--ich-shadow-glow);
+        }
+
+        .academic-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .academic-icon {
+            font-size: 1.8rem;
+        }
+
+        .academic-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--ich-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .academic-desc {
+            font-size: 0.82rem;
+            color: var(--ich-text-muted);
+            line-height: 1.5;
+        }
+
+        .academic-footer {
+            margin-top: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--ich-primary);
+            border-top: 1px solid var(--ich-border-subtle);
+            padding-top: 12px;
+        }
+
+        /* AI Tasks & Career Grids */
+        .action-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 36px;
+        }
+
+        .action-card {
+            background: var(--ich-surface-1);
+            border: 1px solid var(--ich-border-subtle);
+            border-radius: var(--ich-radius-lg);
+            box-shadow: var(--ich-shadow-sm);
+            padding: 20px;
+            text-decoration: none;
+            color: var(--ich-text-primary);
+            transition: all var(--ich-transition-base);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .action-card:hover {
+            border-color: var(--ich-border-accent);
+            background: var(--ich-surface-1);
+            transform: translateY(-2px);
+            box-shadow: var(--ich-shadow-md), var(--ich-shadow-glow);
+        }
+
+        .action-icon {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .action-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--ich-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .action-desc {
+            font-size: 0.82rem;
+            color: var(--ich-text-secondary);
+            line-height: 1.5;
+        }
+
+        .action-link {
+            margin-top: 14px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--ich-primary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Recents Container */
+        .recents-container {
+            background: var(--ich-surface-1);
+            border: 1px solid var(--ich-border-subtle);
+            border-radius: var(--ich-radius-lg);
+            box-shadow: var(--ich-shadow-sm);
+            padding: 16px 20px;
+            margin-bottom: 32px;
+        }
+
+        .recents-empty {
+            color: var(--ich-text-muted);
+            font-size: 0.88rem;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
     </style>
 </head>
@@ -259,216 +299,349 @@
 <div class="ich-page-wrapper">
     <div class="ich-container">
 
-        <!-- Hero Personalized Greeting -->
+        <!-- Hero Personalized Greeting & Command Bar -->
         <div class="hero-banner">
             <div class="hero-greeting">
                 <span id="hero-time-greet">Good day</span>, <span id="hero-user-name">Student</span> 👋
             </div>
             <p class="hero-tagline">
-                Your unified campus knowledge workspace. Access verified subject notes, previous question papers, AI assistants, and attendance calculator.
+                Your first year, figured out. Access verified 1st-year subject notes, previous question papers, task-oriented AI workflows, and your LinkedIn starter kit.
             </p>
-            <div class="hero-actions">
-                <a href="first-year.html" class="ich-btn ich-btn-primary">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/></svg>
-                    <span>1st Year Study Notes</span>
-                </a>
-                <button onclick="openSearchModal()" class="ich-btn ich-btn-secondary">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                    <span>Search Everything (⌘K)</span>
-                </button>
+            
+            <div class="hero-search-box" onclick="openSearchModal()" role="button" tabindex="0" title="Open Global Search">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ich-primary)" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <div class="hero-search-placeholder">Search notes, subjects, question papers, AI tasks, LinkedIn templates...</div>
+                <span class="ich-kbd">⌘K</span>
             </div>
         </div>
 
-        <!-- Student Department Enrolled Spotlight -->
-        <div class="my-branch-box" id="my-branch-spotlight">
+        <!-- Department & Academic Level Indicator -->
+        <div class="dept-context-bar">
+            <div class="dept-context-info">
+                <div class="dept-context-icon" id="spotlight-branch-icon">💻</div>
+                <div>
+                    <div class="dept-context-title" id="spotlight-branch-name">Computer Science & Engineering</div>
+                    <div class="dept-context-sub">1st Year Engineering Hub • Core Academic Curriculum</div>
+                </div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+                <a href="first-year.html" class="ich-btn ich-btn-primary ich-btn-sm">
+                    <span>Explore 1st Year Hub →</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Section 1: CONTINUE WHERE YOU LEFT OFF -->
+        <div class="section-header">
+            <h2 class="section-title">
+                <div class="section-title-icon">🕒</div>
+                Continue Where You Left Off
+            </h2>
+        </div>
+        <div class="recents-container">
+            <div id="recents-content">
+                <!-- Injected dynamically via JS or clean empty state -->
+                <div class="recents-empty">
+                    <span>💡</span>
+                    <span>No recent study sessions recorded yet. Select any subject below to begin studying.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: YOUR ACADEMICS (CORE PRODUCT PILLAR) -->
+        <div class="section-header">
             <div>
-                <span class="ich-badge ich-badge-orange" style="margin-bottom: 6px;">Your Department</span>
-                <div class="branch-info-title">
-                    <span id="spotlight-branch-icon">💻</span>
-                    <span id="spotlight-branch-name">Computer Science & Engineering</span>
-                </div>
-            </div>
-            <div class="year-pills-row">
-                <a href="first-year.html" class="year-pill-btn">1st Year →</a>
-                <a href="select-year.html" class="year-pill-btn">2nd Year →</a>
-                <a href="select-year.html" class="year-pill-btn">3rd Year →</a>
-                <a href="select-year.html" class="year-pill-btn">4th Year →</a>
-            </div>
-        </div>
-
-        <!-- Recently Accessed Subjects (Dynamic) -->
-        <div id="recents-section" style="display: none; margin-bottom: 32px;">
-            <div class="section-header">
                 <h2 class="section-title">
-                    <div class="section-title-icon">🕒</div>
-                    Recently Accessed
+                    <div class="section-title-icon">📚</div>
+                    Your Academics — 1st Year Core
                 </h2>
+                <div style="font-size: 0.85rem; color: var(--ich-text-muted); margin-top: 4px;">
+                    Verified lecture notes, unit modules, and previous examination question papers.
+                </div>
             </div>
-            <div class="ich-recents-row" id="recents-row">
-                <!-- Injected via JS -->
+            <a href="first-year.html" style="font-size: 0.85rem; color: var(--ich-primary); text-decoration: none; font-weight: 700;">View All 8 Subjects →</a>
+        </div>
+
+        <div class="academic-grid">
+            <a href="1styearmaths.html" class="academic-card">
+                <div>
+                    <div class="academic-card-top">
+                        <span class="academic-icon">📐</span>
+                        <span class="ich-badge ich-badge-orange">1st Year</span>
+                    </div>
+                    <div class="academic-title">Mathematics</div>
+                    <div class="academic-desc">Matrices, Differential Equations, Mean Value Theorems, Calculus & Vector Spaces.</div>
+                </div>
+                <div class="academic-footer">
+                    <span>Open Study Notes</span>
+                    <span>→</span>
+                </div>
+            </a>
+
+            <a href="1styearclanguage.html" class="academic-card">
+                <div>
+                    <div class="academic-card-top">
+                        <span class="academic-icon">💻</span>
+                        <span class="ich-badge ich-badge-orange">1st Year</span>
+                    </div>
+                    <div class="academic-title">C Programming</div>
+                    <div class="academic-desc">Pointers, Memory Allocation, Arrays, Strings, File Handling & Recursive Functions.</div>
+                </div>
+                <div class="academic-footer">
+                    <span>Open Study Notes</span>
+                    <span>→</span>
+                </div>
+            </a>
+
+            <a href="1styeardatastructures.html" class="academic-card">
+                <div>
+                    <div class="academic-card-top">
+                        <span class="academic-icon">🌳</span>
+                        <span class="ich-badge ich-badge-orange">1st Year</span>
+                    </div>
+                    <div class="academic-title">Data Structures</div>
+                    <div class="academic-desc">Linked Lists, Stacks, Queues, Binary Trees, Graph Traversals & Search Algorithms.</div>
+                </div>
+                <div class="academic-footer">
+                    <span>Open Study Notes</span>
+                    <span>→</span>
+                </div>
+            </a>
+
+            <a href="1styearphysics.html" class="academic-card">
+                <div>
+                    <div class="academic-card-top">
+                        <span class="academic-icon">⚛️</span>
+                        <span class="ich-badge ich-badge-orange">1st Year</span>
+                    </div>
+                    <div class="academic-title">Applied Physics</div>
+                    <div class="academic-desc">Wave Optics, Lasers, Quantum Mechanics, Semiconductors & Fiber Optics.</div>
+                </div>
+                <div class="academic-footer">
+                    <span>Open Study Notes</span>
+                    <span>→</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Section 3: AI HUB (PRODUCTIVITY LAYER) -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">
+                    <div class="section-title-icon">🤖</div>
+                    AI Hub — Task Shortcuts
+                </h2>
+                <div style="font-size: 0.85rem; color: var(--ich-text-muted); margin-top: 4px;">
+                    Use AI specifically for the task you're working on right now.
+                </div>
+            </div>
+            <a href="ai-hub.html" style="font-size: 0.85rem; color: var(--ich-primary); text-decoration: none; font-weight: 700;">Open AI Hub →</a>
+        </div>
+
+        <div class="action-cards-grid">
+            <a href="ai-hub.html?task=study" class="action-card">
+                <div>
+                    <div class="action-icon">🧠</div>
+                    <div class="action-title">Understand a Concept</div>
+                    <div class="action-desc">Simplify complex theorems, mathematical proofs, and engineering physics with intuitive analogies.</div>
+                </div>
+                <div class="action-link">
+                    <span>Launch Task</span>
+                    <span>→</span>
+                </div>
+            </a>
+
+            <a href="ai-hub.html?task=coding" class="action-card">
+                <div>
+                    <div class="action-icon">🐛</div>
+                    <div class="action-title">Debug C & Python Code</div>
+                    <div class="action-desc">Find segmentation faults, explain syntax errors, and dry-run algorithms step-by-step.</div>
+                </div>
+                <div class="action-link">
+                    <span>Launch Task</span>
+                    <span>→</span>
+                </div>
+            </a>
+
+            <a href="ai-hub.html?task=study" class="action-card">
+                <div>
+                    <div class="action-icon">📝</div>
+                    <div class="action-title">10-Mark Exam Generator</div>
+                    <div class="action-desc">Generate likely university essay questions and step-by-step model answers directly from syllabus.</div>
+                </div>
+                <div class="action-link">
+                    <span>Launch Task</span>
+                    <span>→</span>
+                </div>
+            </a>
+
+            <a href="ai-hub.html?task=study" class="action-card">
+                <div>
+                    <div class="action-icon">📑</div>
+                    <div class="action-title">Summarize Lecture Notes</div>
+                    <div class="action-desc">Extract key formulas, definitions, and high-yield summary points from lengthy PDFs.</div>
+                </div>
+                <div class="action-link">
+                    <span>Launch Task</span>
+                    <span>→</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Section 4: CAREER STARTER (PROFESSIONAL IDENTITY) -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">
+                    <div class="section-title-icon">💼</div>
+                    Career — LinkedIn Starter
+                </h2>
+                <div style="font-size: 0.85rem; color: var(--ich-text-muted); margin-top: 4px;">
+                    Start building your professional identity early. Copyable formulas & templates.
+                </div>
+            </div>
+            <a href="career.html" style="font-size: 0.85rem; color: var(--ich-primary); text-decoration: none; font-weight: 700;">View All Templates →</a>
+        </div>
+
+        <div class="action-cards-grid">
+            <a href="career.html#headline" class="action-card">
+                <div>
+                    <div class="action-icon">✨</div>
+                    <div class="action-title">Craft LinkedIn Headline</div>
+                    <div class="action-desc">Formulas tailored for first-year builders highlighting your college, tech interests, and current focus.</div>
+                </div>
+                <div class="action-link">
+                    <span>View Formula</span>
+                    <span>→</span>
+                </div>
+            </a>
+
+            <a href="career.html#about" class="action-card">
+                <div>
+                    <div class="action-icon">✍️</div>
+                    <div class="action-title">Write "About" Section</div>
+                    <div class="action-desc">Structured bio template highlighting curiosity, active projects in C/Python, and engineering ambition.</div>
+                </div>
+                <div class="action-link">
+                    <span>View Template</span>
+                    <span>→</span>
+                </div>
+            </a>
+
+            <a href="career.html#first-post" class="action-card">
+                <div>
+                    <div class="action-icon">🚀</div>
+                    <div class="action-title">First LinkedIn Post</div>
+                    <div class="action-desc">Ready-to-use "Hello World" post introducing yourself, your college department, and learning goals.</div>
+                </div>
+                <div class="action-link">
+                    <span>Copy Post</span>
+                    <span>→</span>
+                </div>
+            </a>
+
+            <a href="career.html#networking" class="action-card">
+                <div>
+                    <div class="action-icon">🤝</div>
+                    <div class="action-title">Connect with Seniors</div>
+                    <div class="action-desc">Polite, personalized 300-character outreach message to connect with alumni and senior mentors.</div>
+                </div>
+                <div class="action-link">
+                    <span>Copy Message</span>
+                    <span>→</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Section 5: FIRST-YEAR ROADMAP -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">
+                    <div class="section-title-icon">🧭</div>
+                    First-Year Engineering Roadmap
+                </h2>
+                <div style="font-size: 0.85rem; color: var(--ich-text-muted); margin-top: 4px;">
+                    A clear, sequential progression for your first year of college.
+                </div>
             </div>
         </div>
 
-        <!-- Quick Access Section -->
-        <div class="section-header">
-            <h2 class="section-title">
-                <div class="section-title-icon">⚡</div>
-                Quick Access
-            </h2>
-        </div>
-        <div class="quick-grid">
-            <a href="first-year.html" class="quick-card">
-                <div>
-                    <div class="quick-icon">📘</div>
-                    <div class="quick-title">1st Year Notes</div>
-                    <div class="quick-desc">Maths, Physics, C, Data Structures, BEEE</div>
+        <div class="roadmap-timeline">
+            <div class="roadmap-step">
+                <div class="roadmap-step-dot">1</div>
+                <div class="roadmap-step-card">
+                    <div class="roadmap-step-title">
+                        <span>Build Strong Academic Fundamentals</span>
+                        <span class="ich-badge ich-badge-orange">Academics</span>
+                    </div>
+                    <div class="roadmap-step-desc">
+                        Focus on core mathematics (Calculus & Linear Algebra), basic electronics, and physics. Clear concepts early to maintain a healthy CGPA.
+                    </div>
                 </div>
-                <div style="margin-top: 16px; font-size: 0.8rem; font-weight: 700; color: var(--ich-primary);">View All Subjects →</div>
-            </a>
-
-            <a href="select-year.html" class="quick-card">
-                <div>
-                    <div class="quick-icon">📑</div>
-                    <div class="quick-title">Question Papers</div>
-                    <div class="quick-desc">Semester & previous year examination banks</div>
-                </div>
-                <div style="margin-top: 16px; font-size: 0.8rem; font-weight: 700; color: var(--ich-primary);">Browse Papers →</div>
-            </a>
-
-            <a href="ai-hub.html" class="quick-card">
-                <div>
-                    <div class="quick-icon">🤖</div>
-                    <div class="quick-title">AI Hub</div>
-                    <div class="quick-desc">Curated AI tools for coding, study & research</div>
-                </div>
-                <div style="margin-top: 16px; font-size: 0.8rem; font-weight: 700; color: var(--ich-primary);">Launch Tools →</div>
-            </a>
-
-            <a href="attendance.html" class="quick-card">
-                <div>
-                    <div class="quick-icon">📊</div>
-                    <div class="quick-title">Attendance Tracker</div>
-                    <div class="quick-desc">Calculate 75% eligibility & safe leaves</div>
-                </div>
-                <div style="margin-top: 16px; font-size: 0.8rem; font-weight: 700; color: var(--ich-primary);">Calculate Now →</div>
-            </a>
-        </div>
-
-        <!-- Academic Departments -->
-        <div class="section-header">
-            <h2 class="section-title">
-                <div class="section-title-icon">🏛️</div>
-                All Academic Departments
-            </h2>
-            <a href="select-year.html" style="font-size: 0.85rem; color: var(--ich-primary); text-decoration: none; font-weight: 600;">Year Selector →</a>
-        </div>
-        <div class="dept-grid">
-            <a href="select-year.html" class="dept-card">
-                <div class="dept-badge-icon">💻</div>
-                <div>
-                    <div class="dept-name">CSE</div>
-                    <div class="dept-fullname">Computer Science & Engineering</div>
-                </div>
-            </a>
-            <a href="select-year.html" class="dept-card">
-                <div class="dept-badge-icon">⚛️</div>
-                <div>
-                    <div class="dept-name">AIDS</div>
-                    <div class="dept-fullname">AI & Data Science</div>
-                </div>
-            </a>
-            <a href="select-year.html" class="dept-card">
-                <div class="dept-badge-icon">🤖</div>
-                <div>
-                    <div class="dept-name">AIML</div>
-                    <div class="dept-fullname">AI & Machine Learning</div>
-                </div>
-            </a>
-            <a href="select-year.html" class="dept-card">
-                <div class="dept-badge-icon">📡</div>
-                <div>
-                    <div class="dept-name">ECE</div>
-                    <div class="dept-fullname">Electronics & Communication</div>
-                </div>
-            </a>
-            <a href="select-year.html" class="dept-card">
-                <div class="dept-badge-icon">🌐</div>
-                <div>
-                    <div class="dept-name">IT</div>
-                    <div class="dept-fullname">Information Technology</div>
-                </div>
-            </a>
-            <a href="select-year.html" class="dept-card">
-                <div class="dept-badge-icon">⚙️</div>
-                <div>
-                    <div class="dept-name">MECH</div>
-                    <div class="dept-fullname">Mechanical Engineering</div>
-                </div>
-            </a>
-            <a href="select-year.html" class="dept-card">
-                <div class="dept-badge-icon">🏗️</div>
-                <div>
-                    <div class="dept-name">CIVIL</div>
-                    <div class="dept-fullname">Civil Engineering</div>
-                </div>
-            </a>
-            <a href="select-year.html" class="dept-card">
-                <div class="dept-badge-icon">🔌</div>
-                <div>
-                    <div class="dept-name">EEE</div>
-                    <div class="dept-fullname">Electrical & Electronics</div>
-                </div>
-            </a>
-            <a href="select-year.html" class="dept-card">
-                <div class="dept-badge-icon">🎨</div>
-                <div>
-                    <div class="dept-name">CSD</div>
-                    <div class="dept-fullname">Computer Science & Design</div>
-                </div>
-            </a>
-            <a href="select-year.html" class="dept-card">
-                <div class="dept-badge-icon">💼</div>
-                <div>
-                    <div class="dept-name">CSBS</div>
-                    <div class="dept-fullname">CS & Business Systems</div>
-                </div>
-            </a>
-        </div>
-
-        <!-- Student Ecosystem & Founder Network -->
-        <div class="section-header">
-            <h2 class="section-title">
-                <div class="section-title-icon">🚀</div>
-                Student Ecosystem
-            </h2>
-        </div>
-        <div class="ecosystem-grid">
-            <div class="feature-box">
-                <div>
-                    <span class="ich-badge ich-badge-orange" style="margin-bottom: 12px;">NextGen Labs</span>
-                    <h3 style="font-size: 1.3rem; font-weight: 700; color: #FFF; margin-bottom: 8px;">Founder & Builder Network</h3>
-                    <p style="color: var(--ich-text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px;">
-                        Are you building a project, prototype, or startup on campus? Join NextGen Labs to connect with peers, get feedback, and showcase your work.
-                    </p>
-                </div>
-                <a href="../index.html" class="ich-btn ich-btn-secondary" style="align-self: flex-start;">
-                    <span>Visit NextGen Labs</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-                </a>
             </div>
 
-            <div class="feature-box">
-                <div>
-                    <span class="ich-badge ich-badge-gray" style="margin-bottom: 12px;">AI Hub</span>
-                    <h3 style="font-size: 1.3rem; font-weight: 700; color: #FFF; margin-bottom: 8px;">Next-Gen Student Tools</h3>
-                    <p style="color: var(--ich-text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px;">
-                        Supercharge your academic workflow with tested AI assistants for code debugging, literature summarization, and mathematical derivation.
-                    </p>
+            <div class="roadmap-step">
+                <div class="roadmap-step-dot">2</div>
+                <div class="roadmap-step-card">
+                    <div class="roadmap-step-title">
+                        <span>Master Programming Basics & Git</span>
+                        <span class="ich-badge ich-badge-orange">Coding</span>
+                    </div>
+                    <div class="roadmap-step-desc">
+                        Master C programming logic (pointers, arrays, memory) and start Python. Create your GitHub profile and push every practice code.
+                    </div>
                 </div>
-                <a href="ai-hub.html" class="ich-btn ich-btn-primary" style="align-self: flex-start;">
-                    <span>Explore AI Tools</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </a>
+            </div>
+
+            <div class="roadmap-step">
+                <div class="roadmap-step-dot">3</div>
+                <div class="roadmap-step-card">
+                    <div class="roadmap-step-title">
+                        <span>Integrate AI Productivity Tools</span>
+                        <span class="ich-badge ich-badge-blue">Daily Routine</span>
+                    </div>
+                    <div class="roadmap-step-desc">
+                        Use NotebookLM for PDF notes summarization, Claude for code debugging, and Perplexity for technical research.
+                    </div>
+                </div>
+            </div>
+
+            <div class="roadmap-step">
+                <div class="roadmap-step-dot">4</div>
+                <div class="roadmap-step-card">
+                    <div class="roadmap-step-title">
+                        <span>Set Up Your LinkedIn Identity</span>
+                        <span class="ich-badge ich-badge-purple">Networking</span>
+                    </div>
+                    <div class="roadmap-step-desc">
+                        Add a clear headshot, set your builder headline, and connect with 30+ seniors and faculty members on campus.
+                    </div>
+                </div>
+            </div>
+
+            <div class="roadmap-step">
+                <div class="roadmap-step-dot">5</div>
+                <div class="roadmap-step-card">
+                    <div class="roadmap-step-title">
+                        <span>Build Mini-Projects & Data Structures</span>
+                        <span class="ich-badge ich-badge-blue">Projects</span>
+                    </div>
+                    <div class="roadmap-step-desc">
+                        Implement linked lists, stacks, and trees from scratch. Build small terminal utilities, calculators, or simple web tools.
+                    </div>
+                </div>
+            </div>
+
+            <div class="roadmap-step">
+                <div class="roadmap-step-dot">6</div>
+                <div class="roadmap-step-card">
+                    <div class="roadmap-step-title">
+                        <span>Participate in Campus Hackathons</span>
+                        <span class="ich-badge ich-badge-green">Milestone</span>
+                    </div>
+                    <div class="roadmap-step-desc">
+                        Form a team with friends, participate in beginner-friendly hackathons, and document your learnings on LinkedIn.
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -516,16 +689,18 @@
     // Render recently accessed subjects
     const recents = typeof getRecentSubjects === 'function' ? getRecentSubjects() : [];
     if (recents && recents.length > 0) {
-        const sec = document.getElementById('recents-section');
-        const row = document.getElementById('recents-row');
-        sec.style.display = 'block';
-        row.innerHTML = recents.map(r => `
-            <a href="${r.url}" class="ich-recent-chip">
-                <span>${r.icon || '📘'}</span>
-                <span>${escapeHtml(r.title)}</span>
-                <span style="color: var(--ich-primary); font-size: 11px;">→</span>
-            </a>
-        `).join('');
+        const content = document.getElementById('recents-content');
+        content.innerHTML = `
+            <div class="ich-recents-row">
+                ${recents.map(r => `
+                    <a href="${r.url}" class="ich-recent-chip">
+                        <span>${r.icon || '📘'}</span>
+                        <span>${escapeHtml(r.title)}</span>
+                        <span style="color: var(--ich-primary); font-size: 11px;">→</span>
+                    </a>
+                `).join('')}
+            </div>
+        `;
     }
 </script>
 

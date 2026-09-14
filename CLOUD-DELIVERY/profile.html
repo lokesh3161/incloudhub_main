@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile — MEDHAS</title>
+    <link rel="stylesheet" href="incloud-design.css">
+    <script src="auth.js"></script>
+    <script>requireAuth();</script>
+    <style>
+        .profile-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 28px;
+            margin-bottom: 40px;
+        }
+
+        .profile-card {
+            background: var(--ich-surface-1);
+            border: 1px solid var(--ich-border-subtle);
+            box-shadow: var(--ich-shadow-sm);
+            border-radius: var(--ich-radius-xl);
+            padding: 32px 24px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-avatar-lg {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--ich-primary) 0%, #D97706 100%);
+            color: #FFF;
+            font-size: 2.2rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 20px rgba(247, 140, 37, 0.3);
+            border: 2px solid var(--ich-border-accent);
+        }
+
+        .profile-name {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--ich-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .profile-reg {
+            font-size: 0.88rem;
+            color: var(--ich-text-muted);
+            font-family: monospace;
+            letter-spacing: 0.05em;
+            margin-bottom: 14px;
+        }
+
+        .profile-meta-chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .profile-main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .info-card {
+            background: var(--ich-surface-1);
+            border: 1px solid var(--ich-border-subtle);
+            box-shadow: var(--ich-shadow-sm);
+            border-radius: var(--ich-radius-xl);
+            padding: 24px 28px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 16px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .info-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--ich-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .info-value {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--ich-text-primary);
+        }
+
+        @media (max-width: 860px) {
+            .profile-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="ich-page-wrapper">
+    <div class="ich-container">
+
+        <!-- Breadcrumbs Mount -->
+        <div id="ich-breadcrumbs-mount"></div>
+
+        <div style="margin-bottom: 24px;">
+            <h1 style="font-size: 1.85rem; font-weight: 800; color: var(--ich-text-primary); margin-bottom: 4px;">Student <span>Profile</span></h1>
+            <p style="color: var(--ich-text-secondary); font-size: 0.92rem;">Your active MEDHAS academic account & session parameters.</p>
+        </div>
+
+        <div class="profile-layout">
+            
+            <!-- Left Sidebar Card -->
+            <div class="profile-card">
+                <div class="profile-avatar-lg" id="avatar-lg">S</div>
+                <h2 class="profile-name" id="profile-name">Student</h2>
+                <div class="profile-reg" id="profile-reg">REGISTRATION ID</div>
+                
+                <div class="profile-meta-chips">
+                    <span class="ich-badge ich-badge-orange" id="profile-branch-badge">CSE</span>
+                    <span class="ich-badge ich-badge-gray">1st Year</span>
+                    <span class="ich-badge ich-badge-blue">Active Session</span>
+                </div>
+
+                <div style="width: 100%; border-top: 1px solid var(--ich-border-subtle); margin-top: 8px; padding-top: 20px;">
+                    <button class="ich-btn ich-btn-secondary" style="width: 100%; justify-content: center; margin-bottom: 10px;" onclick="handleLogout()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                        <span>Log Out Session</span>
+                    </button>
+                    <a href="login.html" class="ich-btn ich-btn-ghost" style="width: 100%; justify-content: center; font-size: 0.8rem; color: var(--ich-text-muted);">
+                        Switch Account / Re-login
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Main Area -->
+            <div class="profile-main-content">
+
+                <!-- Academic Parameters -->
+                <div class="info-card">
+                    <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--ich-text-primary); display: flex; align-items: center; gap: 8px;">
+                        <span>🎓</span> Academic Enrolment
+                    </h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Full Name</span>
+                            <span class="info-value" id="info-fullname">—</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Registration Number</span>
+                            <span class="info-value" id="info-regno">—</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Department / Branch</span>
+                            <span class="info-value" id="info-dept">—</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Current Academic Level</span>
+                            <span class="info-value">1st Year Engineering (Sem 1 & 2)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Navigation Shortcuts -->
+                <div class="info-card">
+                    <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--ich-text-primary); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                        <span>⚡</span> First-Year Hub Shortcuts
+                    </h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+                        <a href="first-year.html" class="ich-btn ich-btn-secondary" style="justify-content: flex-start;">
+                            <span>📘 1st Year Academics</span>
+                        </a>
+                        <a href="ai-hub.html" class="ich-btn ich-btn-secondary" style="justify-content: flex-start;">
+                            <span>🤖 AI Productivity Hub</span>
+                        </a>
+                        <a href="career.html" class="ich-btn ich-btn-secondary" style="justify-content: flex-start;">
+                            <span>💼 LinkedIn Starter</span>
+                        </a>
+                        <a href="attendance.html" class="ich-btn ich-btn-secondary" style="justify-content: flex-start;">
+                            <span>📊 Attendance Tracker</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Recent Study History -->
+                <div class="info-card">
+                    <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--ich-text-primary); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+                        <span>🕒</span> Recent Study Activity
+                    </h3>
+                    <div id="profile-recents-list">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div id="ich-footer-mount"></div>
+
+<script src="incloud-shell.js"></script>
+<script>
+    renderGlobalNav('profile');
+    renderGlobalFooter('ich-footer-mount');
+    renderBreadcrumbs([
+        { label: 'Home', url: 'home.html' },
+        { label: 'Student Profile', url: 'profile.html' }
+    ]);
+
+    const DEPT_FULLNAMES = {
+        'CSE': 'Computer Science & Engineering',
+        'AIDS': 'Artificial Intelligence & Data Science',
+        'AIML': 'AI & Machine Learning',
+        'ECE': 'Electronics & Communication',
+        'IT': 'Information Technology',
+        'MECH': 'Mechanical Engineering',
+        'CIVIL': 'Civil Engineering',
+        'EEE': 'Electrical & Electronics',
+        'CSD': 'CS & Design',
+        'CSBS': 'CS & Business Systems'
+    };
+
+    const user = typeof getAuthSession === 'function' ? getAuthSession() : null;
+    if (user) {
+        const name = user.name || 'Student';
+        const regno = user.regno || 'N/A';
+        const branch = user.branch || 'Campus';
+        const fullDept = DEPT_FULLNAMES[branch] || branch;
+
+        document.getElementById('avatar-lg').textContent = name.charAt(0).toUpperCase();
+        document.getElementById('profile-name').textContent = name;
+        document.getElementById('profile-reg').textContent = regno;
+        document.getElementById('profile-branch-badge').textContent = branch;
+        document.getElementById('info-fullname').textContent = name;
+        document.getElementById('info-regno').textContent = regno;
+        document.getElementById('info-dept').textContent = `${fullDept} (${branch})`;
+    }
+
+    // Render Recent Study Sessions
+    const recents = typeof getRecentSubjects === 'function' ? getRecentSubjects() : [];
+    const recentsContainer = document.getElementById('profile-recents-list');
+    if (recents && recents.length > 0) {
+        recentsContainer.innerHTML = `
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                ${recents.map(r => `
+                    <a href="${r.url}" class="ich-search-result-item" style="background: var(--ich-surface-2);">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <span style="font-size: 1.2rem;">${r.icon || '📘'}</span>
+                            <div>
+                                <div style="font-weight: 700; color: var(--ich-text-primary);">${escapeHtml(r.title)}</div>
+                                <div style="font-size: 0.78rem; color: var(--ich-text-muted);">Subject Study Notes</div>
+                            </div>
+                        </div>
+                        <span class="ich-badge ich-badge-orange">Resume →</span>
+                    </a>
+                `).join('')}
+            </div>
+        `;
+    } else {
+        recentsContainer.innerHTML = `
+            <div style="color: var(--ich-text-muted); font-size: 0.88rem; padding: 12px 0;">
+                No study sessions recorded yet. Start exploring subjects in <a href="first-year.html" style="color: var(--ich-primary); text-decoration: none;">1st Year Academics</a>!
+            </div>
+        `;
+    }
+</script>
+
+</body>
+</html>

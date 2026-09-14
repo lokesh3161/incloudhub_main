@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Hub — Campus AI Tools & Prompts — MEDHAS</title>
+    <title>AI Hub — Task-Oriented AI Productivity — MEDHAS</title>
     <link rel="stylesheet" href="incloud-design.css">
     <script src="auth.js"></script>
     <script>requireAuth();</script>
     <style>
         .page-header {
-            max-width: 700px;
+            max-width: 720px;
             margin-bottom: 28px;
         }
 
         .page-title {
             font-size: 2rem;
             font-weight: 800;
-            color: #FFF;
+            color: var(--ich-text-primary);
             margin-bottom: 8px;
             letter-spacing: -0.02em;
         }
@@ -29,50 +29,6 @@
             color: var(--ich-text-secondary);
             font-size: 0.95rem;
             line-height: 1.6;
-        }
-
-        /* Starter Prompts Box */
-        .prompts-banner {
-            background: var(--ich-surface-1);
-            border: 1px solid var(--ich-border-accent);
-            border-radius: var(--ich-radius-xl);
-            padding: 24px 28px;
-            margin-bottom: 32px;
-        }
-
-        .prompts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 12px;
-            margin-top: 14px;
-        }
-
-        .prompt-chip {
-            background: var(--ich-surface-2);
-            border: 1px solid var(--ich-border-medium);
-            border-radius: var(--ich-radius-md);
-            padding: 12px 14px;
-            cursor: pointer;
-            transition: all var(--ich-transition-fast);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            font-size: 0.82rem;
-            color: #FFF;
-        }
-
-        .prompt-chip:hover {
-            border-color: var(--ich-primary);
-            background: var(--ich-surface-3);
-            transform: translateY(-2px);
-        }
-
-        .prompt-copy-icon {
-            color: var(--ich-primary);
-            font-size: 11px;
-            font-weight: 700;
-            flex-shrink: 0;
         }
 
         .category-nav {
@@ -89,6 +45,7 @@
             border-radius: var(--ich-radius-full);
             background: var(--ich-surface-1);
             border: 1px solid var(--ich-border-subtle);
+            box-shadow: var(--ich-shadow-sm);
             color: var(--ich-text-secondary);
             font-size: 0.85rem;
             font-weight: 600;
@@ -104,75 +61,32 @@
             color: var(--ich-primary);
         }
 
-        .tools-grid {
+        .tasks-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
             margin-bottom: 40px;
         }
 
-        .tool-card {
+        .tool-link-btn {
             background: var(--ich-surface-1);
-            border: 1px solid var(--ich-border-subtle);
-            border-radius: var(--ich-radius-lg);
-            padding: 24px;
-            text-decoration: none;
-            color: #FFF;
-            transition: all var(--ich-transition-base);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .tool-card:hover {
-            border-color: var(--ich-border-accent);
-            transform: translateY(-3px);
-            box-shadow: var(--ich-shadow-md), var(--ich-shadow-glow);
-            background: var(--ich-surface-2);
-        }
-
-        .tool-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 14px;
-        }
-
-        .tool-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: var(--ich-radius-md);
-            background: var(--ich-surface-2);
             border: 1px solid var(--ich-border-medium);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-        }
-
-        .tool-name {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #FFF;
-            margin-bottom: 4px;
-        }
-
-        .tool-desc {
-            font-size: 0.85rem;
+            border-radius: var(--ich-radius-md);
             color: var(--ich-text-secondary);
-            line-height: 1.5;
-            margin-bottom: 18px;
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--ich-transition-fast);
         }
 
-        .tool-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 0.82rem;
-            font-weight: 600;
+        .tool-link-btn:hover {
+            border-color: var(--ich-primary);
             color: var(--ich-primary);
-            border-top: 1px solid var(--ich-border-subtle);
-            padding-top: 14px;
+            background: var(--ich-primary-light);
         }
     </style>
 </head>
@@ -180,148 +94,31 @@
 
 <div class="ich-page-wrapper">
     <div class="ich-container">
-        
+
+        <!-- Breadcrumbs Mount -->
         <div id="ich-breadcrumbs-mount"></div>
 
+        <!-- Page Header -->
         <div class="page-header">
-            <h1 class="page-title">Campus <span>AI Hub</span></h1>
-            <p class="page-desc">Curated AI tools and pre-tested prompts to help you debug code, generate revision audio guides, extract research citations, and format technical reports.</p>
+            <h1 class="page-title">AI Hub — <span>Task-Oriented Tools</span></h1>
+            <p class="page-desc">
+                Use AI specifically for what you're trying to accomplish. Select your task below, copy the tested engineering prompt, and launch the recommended tool.
+            </p>
         </div>
 
-        <!-- Copyable Student Prompts -->
-        <div class="prompts-banner">
-            <div style="font-weight: 800; color: #FFF; font-size: 1rem; display: flex; align-items: center; gap: 8px;">
-                <span>💡</span> Instant College Study Prompts (Click to Copy)
-            </div>
-            <div class="prompts-grid">
-                <div class="prompt-chip" onclick="copyPromptText('Explain this algorithm step-by-step with time complexity and a dry-run table: ', this)">
-                    <span>“Explain this algorithm step-by-step with time complexity...”</span>
-                    <span class="prompt-copy-icon">Copy 📋</span>
-                </div>
-                <div class="prompt-chip" onclick="copyPromptText('Generate 5 most expected 10-mark examination questions and model answers for this topic: ', this)">
-                    <span>“Generate 5 most expected 10-mark exam questions...”</span>
-                    <span class="prompt-copy-icon">Copy 📋</span>
-                </div>
-                <div class="prompt-chip" onclick="copyPromptText('Find the logical bug in this code and provide the corrected optimized snippet: ', this)">
-                    <span>“Find the bug in this code and provide optimized version...”</span>
-                    <span class="prompt-copy-icon">Copy 📋</span>
-                </div>
-            </div>
-        </div>
-
+        <!-- Category Nav -->
         <div class="category-nav">
-            <button class="category-chip active" onclick="filterCategory('all', this)">All Tools</button>
-            <button class="category-chip" onclick="filterCategory('study', this)">📚 Study & Notes</button>
-            <button class="category-chip" onclick="filterCategory('coding', this)">💻 Coding & Debugging</button>
-            <button class="category-chip" onclick="filterCategory('research', this)">🔬 Research Papers</button>
-            <button class="category-chip" onclick="filterCategory('writing', this)">✍️ Technical Writing</button>
+            <button class="category-chip active" onclick="filterAITasks('all', this)">All Tasks</button>
+            <button class="category-chip" onclick="filterAITasks('study', this)">Study & Exams</button>
+            <button class="category-chip" onclick="filterAITasks('coding', this)">Coding & Debugging</button>
+            <button class="category-chip" onclick="filterAITasks('research', this)">Research & Literature</button>
+            <button class="category-chip" onclick="filterAITasks('writing', this)">Writing & Reports</button>
+            <button class="category-chip" onclick="filterAITasks('presentations', this)">Presentations</button>
         </div>
 
-        <div class="tools-grid" id="tools-grid">
-            <a href="https://notebooklm.google.com" target="_blank" rel="noopener noreferrer" class="tool-card" data-category="study">
-                <div>
-                    <div class="tool-header">
-                        <div class="tool-icon">📓</div>
-                        <span class="ich-badge ich-badge-orange">Study Audio</span>
-                    </div>
-                    <div class="tool-name">Google NotebookLM</div>
-                    <div class="tool-desc">Upload syllabus PDFs and lecture notes to generate instant audio study podcasts, quizzes, and concept summaries.</div>
-                </div>
-                <div class="tool-footer">
-                    <span>Open NotebookLM</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-                </div>
-            </a>
-
-            <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="tool-card" data-category="study writing coding">
-                <div>
-                    <div class="tool-header">
-                        <div class="tool-icon">🤖</div>
-                        <span class="ich-badge ich-badge-orange">General Tutor</span>
-                    </div>
-                    <div class="tool-name">ChatGPT</div>
-                    <div class="tool-desc">Multipurpose AI for problem solving, exam preparation, mathematics derivation, and essay structuring.</div>
-                </div>
-                <div class="tool-footer">
-                    <span>Open ChatGPT</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-                </div>
-            </a>
-
-            <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="tool-card" data-category="coding study">
-                <div>
-                    <div class="tool-header">
-                        <div class="tool-icon">🧠</div>
-                        <span class="ich-badge ich-badge-orange">Logic & Code</span>
-                    </div>
-                    <div class="tool-name">Claude AI</div>
-                    <div class="tool-desc">Exceptional analytical reasoning and clean code generation for complex programming assignments and algorithms.</div>
-                </div>
-                <div class="tool-footer">
-                    <span>Open Claude</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-                </div>
-            </a>
-
-            <a href="https://perplexity.ai" target="_blank" rel="noopener noreferrer" class="tool-card" data-category="research study">
-                <div>
-                    <div class="tool-header">
-                        <div class="tool-icon">🔍</div>
-                        <span class="ich-badge ich-badge-orange">Real-Time Search</span>
-                    </div>
-                    <div class="tool-name">Perplexity AI</div>
-                    <div class="tool-desc">Real-time academic search engine that provides cited answers, peer-reviewed sources, and verified references.</div>
-                </div>
-                <div class="tool-footer">
-                    <span>Open Perplexity</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-                </div>
-            </a>
-
-            <a href="https://consensus.app" target="_blank" rel="noopener noreferrer" class="tool-card" data-category="research">
-                <div>
-                    <div class="tool-header">
-                        <div class="tool-icon">📑</div>
-                        <span class="ich-badge ich-badge-orange">200M+ Papers</span>
-                    </div>
-                    <div class="tool-name">Consensus AI</div>
-                    <div class="tool-desc">AI search engine extracting scientific consensus from peer-reviewed research papers for college projects.</div>
-                </div>
-                <div class="tool-footer">
-                    <span>Open Consensus</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-                </div>
-            </a>
-
-            <a href="https://v0.dev" target="_blank" rel="noopener noreferrer" class="tool-card" data-category="coding">
-                <div>
-                    <div class="tool-header">
-                        <div class="tool-icon">⚡</div>
-                        <span class="ich-badge ich-badge-orange">UI Builder</span>
-                    </div>
-                    <div class="tool-name">v0.dev by Vercel</div>
-                    <div class="tool-desc">Generative UI builder that transforms plain text prompts into clean, production-ready frontend code.</div>
-                </div>
-                <div class="tool-footer">
-                    <span>Open v0</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-                </div>
-            </a>
-
-            <a href="https://quillbot.com" target="_blank" rel="noopener noreferrer" class="tool-card" data-category="writing">
-                <div>
-                    <div class="tool-header">
-                        <div class="tool-icon">✍️</div>
-                        <span class="ich-badge ich-badge-gray">Paraphrasing</span>
-                    </div>
-                    <div class="tool-name">QuillBot</div>
-                    <div class="tool-desc">Paraphrasing, grammar check, and citation generator for technical project reports and documentation.</div>
-                </div>
-                <div class="tool-footer">
-                    <span>Open QuillBot</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-                </div>
-            </a>
+        <!-- Tasks Grid -->
+        <div class="tasks-grid" id="ai-tasks-grid">
+            <!-- Rendered dynamically -->
         </div>
 
     </div>
@@ -332,37 +129,235 @@
 <script src="incloud-shell.js"></script>
 <script>
     renderGlobalNav('ai');
+    renderGlobalFooter('ich-footer-mount');
     renderBreadcrumbs([
         { label: 'Home', url: 'home.html' },
         { label: 'AI Hub', url: 'ai-hub.html' }
     ]);
-    renderGlobalFooter('ich-footer-mount');
 
-    function filterCategory(cat, el) {
-        document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
-        if (el) el.classList.add('active');
+    const AI_TASKS = [
+        // --- STUDY ---
+        {
+            id: 'task-concept',
+            category: 'study',
+            categoryLabel: 'Study',
+            badgeClass: 'ich-badge-orange',
+            title: 'Concept Explainer (Feynman Technique)',
+            recommendedTool: 'NotebookLM / Claude',
+            toolUrl: 'https://notebooklm.google.com',
+            prompt: `You are an expert engineering professor. Explain the concept of [INSERT TOPIC, e.g. Eigenvalues / Pointer Arithmetic / Quantum Tunneling] to a first-year engineering student.
 
-        const cards = document.querySelectorAll('.tool-card');
-        cards.forEach(card => {
-            const categories = (card.getAttribute('data-category') || '').split(' ');
-            if (cat === 'all' || categories.includes(cat)) {
-                card.style.display = 'flex';
-            } else {
-                card.style.display = 'none';
-            }
-        });
+Requirements:
+1. Provide an intuitive real-world analogy.
+2. Break it down into 3 core principles without jargon.
+3. Give one simple mathematical or code example demonstrating how it is used.
+4. Highlight the most common mistake students make during exams.`
+        },
+        {
+            id: 'task-10mark',
+            category: 'study',
+            categoryLabel: 'Study',
+            badgeClass: 'ich-badge-orange',
+            title: '10-Mark University Exam Generator',
+            recommendedTool: 'ChatGPT / Claude',
+            toolUrl: 'https://chatgpt.com',
+            prompt: `Act as a senior university examination paper setter for first-year engineering students.
+
+Syllabus Unit: [PASTE UNIT SYLLABUS OR TOPIC NAME]
+
+Generate 3 high-probability 10-mark essay questions along with:
+- Sub-division breakdown (e.g. 6 marks derivation + 4 marks numerical problem).
+- Step-by-step model answer outline with key equations and diagram requirements.
+- Key marking scheme points.`
+        },
+        {
+            id: 'task-summarize',
+            category: 'study',
+            categoryLabel: 'Study',
+            badgeClass: 'ich-badge-orange',
+            title: 'Lecture Notes & PDF Summarizer',
+            recommendedTool: 'NotebookLM',
+            toolUrl: 'https://notebooklm.google.com',
+            prompt: `Summarize the uploaded lecture material into an exam revision cheatsheet:
+
+1. Key Definitions & Formulas (in concise bullet points).
+2. Comparison Table between related concepts if applicable.
+3. 5 Quick Self-Test Flashcard Questions with Answers.
+4. High-yield summary summary for quick review 1 hour before an exam.`
+        },
+
+        // --- CODING ---
+        {
+            id: 'task-debug',
+            category: 'coding',
+            categoryLabel: 'Coding',
+            badgeClass: 'ich-badge-blue',
+            title: 'Code Debugger & Root Cause Analysis',
+            recommendedTool: 'Claude / ChatGPT',
+            toolUrl: 'https://claude.ai',
+            prompt: `I am writing this code in [C / Python / C++]:
+
+[PASTE YOUR CODE HERE]
+
+Error Message / Unexpected Behavior:
+[PASTE COMPILER ERROR OR OUTPUT HERE]
+
+Please:
+1. Explain the exact root cause of the error in simple terms.
+2. Provide the corrected code with clear line-by-line comments.
+3. Explain how to avoid this bug in future programs.`
+        },
+        {
+            id: 'task-dryrun',
+            category: 'coding',
+            categoryLabel: 'Coding',
+            badgeClass: 'ich-badge-blue',
+            title: 'Algorithm Step-by-Step Dry Runner',
+            recommendedTool: 'ChatGPT / Claude',
+            toolUrl: 'https://chatgpt.com',
+            prompt: `Dry-run the following algorithm step-by-step for the given sample input:
+
+Algorithm / Code:
+[PASTE CODE OR ALGORITHM, e.g. Binary Search / Bubble Sort / Linked List Traversal]
+
+Input:
+[SPECIFY INPUT, e.g. Array: [12, 4, 19, 7, 2]]
+
+Please display a trace table showing the exact values of all variables, pointers, loop indices, and output at each iteration.`
+        },
+        {
+            id: 'task-complexity',
+            category: 'coding',
+            categoryLabel: 'Coding',
+            badgeClass: 'ich-badge-blue',
+            title: 'Time & Space Complexity Analyzer',
+            recommendedTool: 'Claude',
+            toolUrl: 'https://claude.ai',
+            prompt: `Analyze the time and space complexity of this function:
+
+[PASTE CODE HERE]
+
+1. State Best, Average, and Worst-case Time Complexity in Big-O notation with mathematical proof.
+2. State Auxiliary Space Complexity (including recursion stack if applicable).
+3. Suggest 1 optimization to reduce time or memory complexity.`
+        },
+
+        // --- RESEARCH ---
+        {
+            id: 'task-research',
+            category: 'research',
+            categoryLabel: 'Research',
+            badgeClass: 'ich-badge-purple',
+            title: 'Literature & Topic Explorer',
+            recommendedTool: 'Perplexity',
+            toolUrl: 'https://www.perplexity.ai',
+            prompt: `Provide an introductory research overview on [TOPIC, e.g. Quantum Dot Solar Cells / Graph Neural Networks / Neuromorphic Computing]:
+
+1. What is the fundamental problem this technology solves?
+2. Current state-of-the-art developments in 2025-2026.
+3. 3 beginner-friendly research papers or review articles with direct citations.
+4. Suggested mini-project or simulation idea for a first-year student.`
+        },
+
+        // --- WRITING ---
+        {
+            id: 'task-writing',
+            category: 'writing',
+            categoryLabel: 'Writing',
+            badgeClass: 'ich-badge-green',
+            title: 'Technical Report & Abstract Polisher',
+            recommendedTool: 'ChatGPT / Claude',
+            toolUrl: 'https://chatgpt.com',
+            prompt: `You are an IEEE technical editor. Improve the following technical report abstract or project description for professional tone, precision, and clarity:
+
+[PASTE DRAFT HERE]
+
+Ensure:
+- Clear problem statement, methodology, results, and conclusion.
+- Active, confident engineering voice.
+- Zero grammatical errors and crisp phrasing.`
+        },
+
+        // --- PRESENTATIONS ---
+        {
+            id: 'task-presentation',
+            category: 'presentations',
+            categoryLabel: 'Presentations',
+            badgeClass: 'ich-badge-orange',
+            title: '5-Minute Seminar Slide Deck Outline',
+            recommendedTool: 'Claude / ChatGPT',
+            toolUrl: 'https://claude.ai',
+            prompt: `Create a concise 6-slide presentation structure for a 5-minute technical seminar on [TOPIC]:
+
+Slide 1: Title & Hook (Compelling opening problem statement)
+Slide 2: Background & Architecture (How it works conceptually)
+Slide 3: Key Features & Working Mechanism
+Slide 4: Real-world Applications & Case Study
+Slide 5: Challenges & Future Scope
+Slide 6: Conclusion & Q&A
+
+Include bullet points for slide visual elements and what the speaker should say for each slide.`
+        }
+    ];
+
+    let currentCategory = 'all';
+
+    function filterAITasks(cat, btn) {
+        currentCategory = cat;
+        document.querySelectorAll('.category-chip').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        renderTaskCards();
     }
 
-    function copyPromptText(text, el) {
-        navigator.clipboard.writeText(text).then(() => {
-            const icon = el.querySelector('.prompt-copy-icon');
-            if (icon) {
-                const prev = icon.textContent;
-                icon.textContent = 'Copied! ✓';
-                setTimeout(() => icon.textContent = prev, 2000);
-            }
-        });
+    function renderTaskCards() {
+        const grid = document.getElementById('ai-tasks-grid');
+        if (!grid) return;
+
+        const filtered = currentCategory === 'all' 
+            ? AI_TASKS 
+            : AI_TASKS.filter(t => t.category === currentCategory);
+
+        grid.innerHTML = filtered.map(item => `
+            <div class="prompt-card" id="${item.id}">
+                <div>
+                    <div class="prompt-card-header">
+                        <h4 class="prompt-title">${escapeHtml(item.title)}</h4>
+                        <span class="prompt-category-badge ${item.badgeClass}">${item.categoryLabel}</span>
+                    </div>
+                    <div style="font-size: 0.8rem; color: var(--ich-primary); font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                        <span>Recommended:</span>
+                        <span style="color: var(--ich-text-primary);">${escapeHtml(item.recommendedTool)}</span>
+                    </div>
+                    <div class="prompt-body" id="text-${item.id}">${escapeHtml(item.prompt)}</div>
+                </div>
+                <div class="prompt-actions">
+                    <button class="btn-copy-prompt" onclick="copyToClipboard(document.getElementById('text-${item.id}').textContent, this, 'Prompt Copied!')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        <span>Copy Prompt</span>
+                    </button>
+                    <a href="${item.toolUrl}" target="_blank" rel="noopener noreferrer" class="tool-link-btn" title="Open ${escapeHtml(item.recommendedTool)}">
+                        <span>Launch Tool</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                    </a>
+                </div>
+            </div>
+        `).join('');
     }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const taskParam = params.get('task');
+        if (taskParam) {
+            const indexMap = { 'study': 1, 'coding': 2, 'research': 3, 'writing': 4, 'presentations': 5 };
+            const chipIdx = indexMap[taskParam] || 0;
+            const chips = document.querySelectorAll('.category-chip');
+            if (chips[chipIdx]) {
+                filterAITasks(taskParam, chips[chipIdx]);
+                return;
+            }
+        }
+        renderTaskCards();
+    });
 </script>
 
 </body>

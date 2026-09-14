@@ -44,20 +44,21 @@
         .form-input {
             width: 100%;
             padding: 12px 16px;
-            background: var(--ich-surface-2);
+            background: #FFFFFF;
             border: 1px solid var(--ich-border-medium);
             border-radius: var(--ich-radius-md);
-            color: #FFF;
+            color: var(--ich-text-primary);
             font-family: var(--ich-font);
             font-size: 1.05rem;
             outline: none;
+            box-shadow: var(--ich-shadow-sm);
             transition: all var(--ich-transition-fast);
         }
 
         .form-input:focus {
             border-color: var(--ich-primary);
             box-shadow: 0 0 0 3px var(--ich-primary-light);
-            background: var(--ich-surface-3);
+            background: #FFFFFF;
         }
 
         .target-options {
@@ -68,74 +69,105 @@
         .target-btn {
             flex: 1;
             padding: 10px;
-            background: var(--ich-surface-2);
-            border: 1px solid var(--ich-border-medium);
+            background: var(--ich-surface-1);
+            border: 1px solid var(--ich-border-subtle);
+            box-shadow: var(--ich-shadow-sm);
             border-radius: var(--ich-radius-md);
             color: var(--ich-text-secondary);
-            font-weight: 700;
             font-size: 0.88rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all var(--ich-transition-fast);
-            min-height: 42px;
         }
 
-        .target-btn.active {
+        .target-btn.active, .target-btn:hover {
             background: var(--ich-primary-light);
             border-color: var(--ich-primary);
             color: var(--ich-primary);
         }
 
-        .result-box {
-            background: var(--ich-surface-2);
-            border: 1px solid var(--ich-border-medium);
-            border-radius: var(--ich-radius-lg);
-            padding: 24px;
-            text-align: center;
-            height: 100%;
+        .result-card, .result-box {
+            background: var(--ich-surface-1);
+            border: 1px solid var(--ich-border-subtle);
+            border-radius: var(--ich-radius-xl);
+            box-shadow: var(--ich-shadow-sm);
+            padding: 28px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
+            height: 100%;
+            text-align: center;
         }
 
-        .percent-display {
-            font-size: 3.6rem;
+        .calc-card {
+            background: var(--ich-surface-1);
+            border: 1px solid var(--ich-border-subtle);
+            border-radius: var(--ich-radius-xl);
+            box-shadow: var(--ich-shadow-sm);
+            padding: 28px;
+        }
+
+        .calc-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto 36px auto;
+        }
+
+        @media (max-width: 768px) {
+            .calc-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .percent-display, .percentage-display {
+            font-size: 3.5rem;
             font-weight: 800;
             color: var(--ich-primary);
-            line-height: 1.1;
-            margin-bottom: 4px;
+            line-height: 1;
+            margin-bottom: 8px;
         }
 
         .status-badge {
-            display: inline-block;
-            padding: 6px 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
             border-radius: var(--ich-radius-full);
-            font-weight: 700;
             font-size: 0.85rem;
-            margin-bottom: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 20px;
         }
 
-        .status-good {
+        .status-badge.safe, .status-good {
             background: var(--ich-success-light);
             color: var(--ich-success);
             border: 1px solid rgba(16, 185, 129, 0.3);
         }
 
-        .status-warning {
+        .status-badge.warning, .status-warning {
             background: rgba(245, 158, 11, 0.15);
             color: var(--ich-warning);
             border: 1px solid rgba(245, 158, 11, 0.3);
         }
 
-        .status-danger {
+        .status-badge.danger, .status-danger {
             background: var(--ich-danger-light);
             color: var(--ich-danger);
             border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
-        .verdict-text {
+        .outcome-box, .verdict-text {
             font-size: 0.95rem;
             line-height: 1.6;
-            color: #FFF;
+            color: var(--ich-text-primary);
             padding: 16px;
             background: var(--ich-surface-1);
             border-radius: var(--ich-radius-md);
@@ -151,13 +183,13 @@
         <div id="ich-breadcrumbs-mount"></div>
 
         <div style="text-align: center; max-width: 650px; margin: 0 auto 36px auto;">
-            <h1 style="font-size: 2rem; font-weight: 800; color: #FFF; margin-bottom: 8px;">Attendance & <span>Bunk Calculator</span></h1>
+            <h1 style="font-size: 2rem; font-weight: 800; color: var(--ich-text-primary); margin-bottom: 8px;">Attendance & <span>Bunk Calculator</span></h1>
             <p style="color: var(--ich-text-secondary); font-size: 0.95rem;">Instant exam eligibility checker. Find out exactly how many classes you can afford to skip or must attend to stay safe.</p>
         </div>
 
         <div class="calc-wrapper">
             <div class="calc-card">
-                <h2 style="font-size: 1.2rem; font-weight: 700; color: #FFF; margin-bottom: 20px;">Class Information</h2>
+                <h2 style="font-size: 1.2rem; font-weight: 700; color: var(--ich-text-primary); margin-bottom: 20px;">Class Information</h2>
                 
                 <div class="form-group">
                     <label class="form-label" for="held">Total Classes Held</label>
