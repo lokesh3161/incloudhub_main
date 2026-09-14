@@ -3,217 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InCloudHub – Login</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>MEDHAS — Campus Portal</title>
+    <link rel="stylesheet" href="incloud-design.css">
+    <link rel="stylesheet" href="medhas-animation.css">
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+        }
 
         body {
+            margin: 0;
+            padding: 0;
             min-height: 100vh;
-            background: radial-gradient(circle at top left, #1a1a1a, #0a0a0a 80%);
-            font-family: 'Poppins', sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .login-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(247, 140, 37, 0.2);
-            border-radius: 24px;
-            padding: 45px 40px;
-            width: 100%;
-            max-width: 420px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-        }
-
-        .logo {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .logo h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #F78C25;
-        }
-
-        .logo p {
-            color: #aaa;
-            font-size: 0.85rem;
-            margin-top: 5px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            color: #ccc;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 14px 18px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: #fff;
-            font-size: 15px;
-            font-family: 'Poppins', sans-serif;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            outline: none;
-        }
-
-        input::placeholder { color: #555; }
-
-        input:focus, select:focus {
-            border-color: #F78C25;
-            box-shadow: 0 0 0 3px rgba(247, 140, 37, 0.15);
-        }
-
-        select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23F78C25' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 18px center;
-        }
-
-        select option {
-            background: #1a1a1a;
-            color: #fff;
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 15px;
-            background: #F78C25;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 700;
-            font-family: 'Poppins', sans-serif;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
-        }
-
-        .login-btn:hover {
-            background: #e07d1a;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(247, 140, 37, 0.35);
-        }
-
-        .login-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
-        .footer-text {
-            text-align: center;
-            color: #555;
-            font-size: 12px;
-            margin-top: 25px;
-        }
-
-        .admin-link {
-            display: block;
-            text-align: center;
-            margin-top: 15px;
-            color: #F78C25;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            opacity: 0.6;
-            transition: opacity 0.3s;
-        }
-
-        .admin-link:hover { opacity: 1; }
-
-        .error-msg {
-            color: #ff6b6b;
-            font-size: 12px;
-            margin-top: 6px;
-            display: none;
+            background: #0B0D11;
+            font-family: var(--ich-font, "Plus Jakarta Sans", sans-serif);
+            color: #EEF0F4;
+            overflow-x: hidden;
+            position: relative;
         }
     </style>
 </head>
 <body>
+
 <script src="config.js"></script>
 <script src="auth.js"></script>
-<script>redirectIfAuthenticated();</script>
-
-<div class="login-card">
-    <div class="logo">
-        <h1>☁️ InCloudHub</h1>
-        <p>Sign in to access your campus portal</p>
-    </div>
-
-    <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" id="name" placeholder="Enter your full name">
-        <span class="error-msg" id="nameErr">Please enter your name</span>
-    </div>
-
-    <div class="form-group">
-        <label>Register Number</label>
-        <input type="text" id="regno" placeholder="Ex: 22A91A0501">
-        <span class="error-msg" id="regErr">Please enter your register number</span>
-    </div>
-
-    <div class="form-group">
-        <label>Branch</label>
-        <select id="branch">
-            <option value="">-- Select your branch --</option>
-            <option value="CSE">CSE</option>
-            <option value="ECE">ECE</option>
-            <option value="IT">IT</option>
-            <option value="AIML">AIML</option>
-            <option value="AIDS">AIDS</option>
-            <option value="MECH">MECH</option>
-            <option value="CIVIL">CIVIL</option>
-            <option value="CSD">CSD</option>
-            <option value="CSBS">CSBS</option>
-            <option value="CSIT">CSIT</option>
-            <option value="CIC">CIC</option>
-        </select>
-        <span class="error-msg" id="branchErr">Please select your branch</span>
-    </div>
-
-    <button class="login-btn" onclick="handleLogin()">Login →</button>
-
-    <a class="admin-link" href="admin.html">🔐 Admin Access</a>
-
-    <div class="footer-text">© 2026 InCloudHub | Designed by Lokesh Thanala 🚀</div>
-</div>
-
 <script>
+    redirectIfAuthenticated();
+</script>
+
+<!-- Full-Screen Ambient Atmospheric Vignette -->
+<div class="medhas-atmosphere-overlay" aria-hidden="true"></div>
+
+<!-- Full-Screen Floating Living Interface -->
+<main class="medhas-login-viewport">
+    <section class="medhas-floating-auth">
+        <!-- Brand Emblem & Title -->
+        <header class="medhas-auth__brand-header">
+            <div class="medhas-auth__brand">
+                <div class="medhas-auth__logo-emblem" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                <span class="medhas-auth__brand-name">MED<span>HAS</span></span>
+            </div>
+            <h1 class="medhas-auth__title">Welcome back</h1>
+            <p class="medhas-auth__subtitle">Sign in to enter the living knowledge portal & resources</p>
+        </header>
+
+        <!-- Floating Transparent Login Form -->
+        <form id="loginForm" onsubmit="event.preventDefault(); handleLogin();">
+            <div class="medhas-field-group">
+                <label class="medhas-field-label" for="name">Full Name</label>
+                <input type="text" id="name" class="medhas-input-field" placeholder="e.g. Lokesh Thanala" autocomplete="name" required>
+                <span class="medhas-error-text" id="nameErr">Please enter your name</span>
+            </div>
+
+            <div class="medhas-field-group">
+                <label class="medhas-field-label" for="regno">Registration / Roll Number</label>
+                <input type="text" id="regno" class="medhas-input-field" placeholder="e.g. 22A91A0501" autocomplete="off" required>
+                <span class="medhas-error-text" id="regErr">Please enter your registration number</span>
+            </div>
+
+            <div class="medhas-field-group">
+                <label class="medhas-field-label" for="branch">Engineering Department</label>
+                <select id="branch" class="medhas-input-field medhas-select-field" required>
+                    <option value="">-- Choose your department --</option>
+                    <option value="CSE">Computer Science & Engineering (CSE)</option>
+                    <option value="AIDS">AI & Data Science (AIDS)</option>
+                    <option value="AIML">AI & Machine Learning (AIML)</option>
+                    <option value="ECE">Electronics & Communication (ECE)</option>
+                    <option value="IT">Information Technology (IT)</option>
+                    <option value="MECH">Mechanical Engineering (MECH)</option>
+                    <option value="CIVIL">Civil Engineering (CIVIL)</option>
+                    <option value="EEE">Electrical & Electronics (EEE)</option>
+                    <option value="CSD">CS & Design (CSD)</option>
+                    <option value="CSBS">CS & Business Systems (CSBS)</option>
+                </select>
+                <span class="medhas-error-text" id="branchErr">Please select your department</span>
+            </div>
+
+            <button type="submit" class="medhas-submit-action" id="loginBtn">
+                <span>Continue to Dashboard</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </button>
+        </form>
+
+        <a class="medhas-admin-access" href="admin.html">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>Faculty & Admin Access</span>
+        </a>
+
+        <div class="medhas-footer-meta">
+            © 2026 MEDHAS • Learn. Think. Build.
+        </div>
+    </section>
+</main>
+
+<script src="medhas-animation.js"></script>
+<script>
+    // Initialize full-screen MEDHAS living knowledge interface
+    let medhasEngine = null;
+    (function initLivingInterface() {
+        if (typeof MedhasAnimation !== 'undefined') {
+            medhasEngine = MedhasAnimation.init({
+                container: document.body
+            });
+            window._medhasEngine = medhasEngine;
+        }
+    })();
+
+    // MEDHAS Form Interaction Controller
+    // Coordinates form interaction events with the living knowledge interface
+    (function initFormController() {
+        const FIELD_ORDER = ['name', 'regno', 'branch'];
+        let lastActiveField = null;
+        let lastActiveRect = null;
+        let tabDirection = 'forward';
+        let typingThrottleTimer = null;
+
+        // Detect tab / shift+tab direction from keyboard
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                tabDirection = e.shiftKey ? 'reverse' : 'forward';
+            }
+        }, { capture: true });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const nameInput = document.getElementById('name');
+            const regnoInput = document.getElementById('regno');
+            const branchSelect = document.getElementById('branch');
+            const loginBtn = document.getElementById('loginBtn');
+            const form = document.getElementById('loginForm');
+
+            const elements = {
+                name: nameInput,
+                regno: regnoInput,
+                branch: branchSelect
+            };
+
+            function checkFormValidity() {
+                const nameVal = nameInput ? nameInput.value.trim() : '';
+                const regnoVal = regnoInput ? regnoInput.value.trim() : '';
+                const branchVal = branchSelect ? branchSelect.value.trim() : '';
+                const isReady = !!(nameVal && regnoVal && branchVal);
+                
+                if (medhasEngine && typeof medhasEngine.setReady === 'function') {
+                    medhasEngine.setReady(isReady);
+                }
+                if (loginBtn) {
+                    if (isReady) {
+                        loginBtn.classList.add('is-ready');
+                    } else {
+                        loginBtn.classList.remove('is-ready');
+                    }
+                }
+            }
+
+            function handleFieldFocus(fieldName) {
+                const el = elements[fieldName];
+                if (!el) return;
+
+                if (!medhasEngine) return;
+
+                if (typeof medhasEngine.setTarget === 'function') {
+                    medhasEngine.setTarget(el, fieldName);
+                } else if (typeof medhasEngine.activateField === 'function') {
+                    medhasEngine.activateField(fieldName, el.getBoundingClientRect());
+                }
+
+                lastActiveField = fieldName;
+                lastActiveRect = el.getBoundingClientRect();
+            }
+
+            function handleTyping(fieldName) {
+                checkFormValidity();
+                if (!medhasEngine || typeof medhasEngine.onFieldTyping !== 'function') return;
+
+                if (typingThrottleTimer) return;
+                typingThrottleTimer = setTimeout(() => {
+                    typingThrottleTimer = null;
+                }, 180);
+
+                const el = elements[fieldName];
+                if (el) {
+                    medhasEngine.onFieldTyping(fieldName, el.getBoundingClientRect());
+                }
+            }
+
+            // Bind Field Focus & Input Events
+            if (nameInput) {
+                nameInput.addEventListener('focus', () => handleFieldFocus('name'));
+                nameInput.addEventListener('input', () => handleTyping('name'));
+                nameInput.addEventListener('click', () => handleFieldFocus('name'));
+            }
+
+            if (regnoInput) {
+                regnoInput.addEventListener('focus', () => handleFieldFocus('regno'));
+                regnoInput.addEventListener('input', () => handleTyping('regno'));
+                regnoInput.addEventListener('click', () => handleFieldFocus('regno'));
+            }
+
+            if (branchSelect) {
+                branchSelect.addEventListener('focus', () => handleFieldFocus('branch'));
+                branchSelect.addEventListener('click', () => handleFieldFocus('branch'));
+                branchSelect.addEventListener('change', () => {
+                    const rect = branchSelect.getBoundingClientRect();
+                    if (medhasEngine && typeof medhasEngine.setDepartment === 'function') {
+                        medhasEngine.setDepartment(branchSelect.value, rect);
+                    }
+                    checkFormValidity();
+                });
+            }
+
+            // Clear target when clicking outside the form pane
+            document.addEventListener('click', (e) => {
+                const formCard = document.querySelector('.medhas-floating-auth');
+                if (formCard && !formCard.contains(e.target) && medhasEngine && typeof medhasEngine.clearTarget === 'function') {
+                    medhasEngine.clearTarget();
+                    lastActiveField = null;
+                }
+            });
+
+            // Button Hover and Focus Interactions
+            if (loginBtn) {
+                const triggerBtnHover = () => {
+                    if (medhasEngine && typeof medhasEngine.triggerButtonHover === 'function') {
+                        medhasEngine.triggerButtonHover(loginBtn.getBoundingClientRect());
+                    }
+                };
+                loginBtn.addEventListener('mouseenter', triggerBtnHover);
+                loginBtn.addEventListener('focus', triggerBtnHover);
+                loginBtn.addEventListener('mouseleave', () => {
+                    if (lastActiveField && elements[lastActiveField] && document.activeElement === elements[lastActiveField]) {
+                        medhasEngine && medhasEngine.setTarget(elements[lastActiveField], lastActiveField);
+                    }
+                });
+            }
+
+            // Initial check
+            checkFormValidity();
+        });
+    })();
+
     const SHEET_URL = CONFIG.SHEET_URL;
 
     function handleLogin() {
-        const name   = document.getElementById('name').value.trim();
-        const regno  = document.getElementById('regno').value.trim();
-        const branch = document.getElementById('branch').value;
+        const nameEl   = document.getElementById('name');
+        const regnoEl  = document.getElementById('regno');
+        const branchEl = document.getElementById('branch');
+
+        const name   = nameEl.value.trim();
+        const regno  = regnoEl.value.trim();
+        const branch = branchEl.value;
 
         document.getElementById('nameErr').style.display = 'none';
         document.getElementById('regErr').style.display = 'none';
         document.getElementById('branchErr').style.display = 'none';
 
         let valid = true;
-        if (!name)   { document.getElementById('nameErr').style.display = 'block'; valid = false; }
-        if (!regno)  { document.getElementById('regErr').style.display = 'block'; valid = false; }
-        if (!branch) { document.getElementById('branchErr').style.display = 'block'; valid = false; }
-        if (!valid) return;
+        let firstInvalidField = null;
+        let firstInvalidEl = null;
 
-        const btn = document.querySelector('.login-btn');
+        if (!name) {
+            document.getElementById('nameErr').style.display = 'block';
+            valid = false;
+            if (!firstInvalidField) { firstInvalidField = 'name'; firstInvalidEl = nameEl; }
+        }
+        if (!regno) {
+            document.getElementById('regErr').style.display = 'block';
+            valid = false;
+            if (!firstInvalidField) { firstInvalidField = 'regno'; firstInvalidEl = regnoEl; }
+        }
+        if (!branch) {
+            document.getElementById('branchErr').style.display = 'block';
+            valid = false;
+            if (!firstInvalidField) { firstInvalidField = 'branch'; firstInvalidEl = branchEl; }
+        }
+
+        if (!valid) {
+            if (window._medhasEngine && typeof window._medhasEngine.triggerError === 'function') {
+                window._medhasEngine.triggerError(firstInvalidField, firstInvalidEl ? firstInvalidEl.getBoundingClientRect() : null);
+            }
+            if (firstInvalidEl) {
+                firstInvalidEl.focus();
+            }
+            return;
+        }
+
+        const btn = document.getElementById('loginBtn');
         btn.disabled = true;
-        btn.textContent = 'Logging in...';
+        btn.innerHTML = `<span>Entering Medhas...</span>`;
 
         const timestamp = new Date().toLocaleString();
 
@@ -223,21 +308,31 @@
         formData.append('branch', branch);
         formData.append('timestamp', timestamp);
 
+        const completeLogin = () => {
+            setAuthSession({ name, regno, branch });
+            if (window._medhasEngine && typeof window._medhasEngine.triggerLoginTransition === 'function') {
+                window._medhasEngine.triggerLoginTransition(() => {
+                    window.location.href = 'home.html';
+                });
+            } else {
+                window.location.href = 'home.html';
+            }
+        };
+
         fetch(SHEET_URL, {
             method: 'POST',
             mode: 'no-cors',
             body: formData
         })
         .then(() => {
-            setAuthSession({ name, regno, branch });
-            window.location.href = 'home.html';
+            completeLogin();
         })
         .catch(() => {
-            setAuthSession({ name, regno, branch });
-            window.location.href = 'home.html';
+            completeLogin();
         });
     }
 </script>
 
 </body>
 </html>
+

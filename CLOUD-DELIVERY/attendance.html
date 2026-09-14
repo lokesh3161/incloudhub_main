@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance & Bunk Calculator — MEDHAS</title>
+    <link rel="stylesheet" href="incloud-design.css">
+    <script src="auth.js"></script>
+    <script>requireAuth();</script>
+    <style>
+        .calc-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+        }
+
+        @media (max-width: 768px) {
+            .calc-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .calc-card {
+            background: var(--ich-surface-1);
+            border: 1px solid var(--ich-border-subtle);
+            border-radius: var(--ich-radius-xl);
+            padding: 32px 28px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--ich-text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--ich-surface-2);
+            border: 1px solid var(--ich-border-medium);
+            border-radius: var(--ich-radius-md);
+            color: #FFF;
+            font-family: var(--ich-font);
+            font-size: 1.05rem;
+            outline: none;
+            transition: all var(--ich-transition-fast);
+        }
+
+        .form-input:focus {
+            border-color: var(--ich-primary);
+            box-shadow: 0 0 0 3px var(--ich-primary-light);
+            background: var(--ich-surface-3);
+        }
+
+        .target-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .target-btn {
+            flex: 1;
+            padding: 10px;
+            background: var(--ich-surface-2);
+            border: 1px solid var(--ich-border-medium);
+            border-radius: var(--ich-radius-md);
+            color: var(--ich-text-secondary);
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all var(--ich-transition-fast);
+            min-height: 42px;
+        }
+
+        .target-btn.active {
+            background: var(--ich-primary-light);
+            border-color: var(--ich-primary);
+            color: var(--ich-primary);
+        }
+
+        .result-box {
+            background: var(--ich-surface-2);
+            border: 1px solid var(--ich-border-medium);
+            border-radius: var(--ich-radius-lg);
+            padding: 24px;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .percent-display {
+            font-size: 3.6rem;
+            font-weight: 800;
+            color: var(--ich-primary);
+            line-height: 1.1;
+            margin-bottom: 4px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: var(--ich-radius-full);
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+
+        .status-good {
+            background: var(--ich-success-light);
+            color: var(--ich-success);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-warning {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--ich-warning);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .status-danger {
+            background: var(--ich-danger-light);
+            color: var(--ich-danger);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .verdict-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #FFF;
+            padding: 16px;
+            background: var(--ich-surface-1);
+            border-radius: var(--ich-radius-md);
+            border: 1px solid var(--ich-border-subtle);
+        }
+    </style>
+</head>
+<body>
+
+<div class="ich-page-wrapper">
+    <div class="ich-container">
+        
+        <div id="ich-breadcrumbs-mount"></div>
+
+        <div style="text-align: center; max-width: 650px; margin: 0 auto 36px auto;">
+            <h1 style="font-size: 2rem; font-weight: 800; color: #FFF; margin-bottom: 8px;">Attendance & <span>Bunk Calculator</span></h1>
+            <p style="color: var(--ich-text-secondary); font-size: 0.95rem;">Instant exam eligibility checker. Find out exactly how many classes you can afford to skip or must attend to stay safe.</p>
+        </div>
+
+        <div class="calc-wrapper">
+            <div class="calc-card">
+                <h2 style="font-size: 1.2rem; font-weight: 700; color: #FFF; margin-bottom: 20px;">Class Information</h2>
+                
+                <div class="form-group">
+                    <label class="form-label" for="held">Total Classes Held</label>
+                    <div class="ich-stepper-wrap">
+                        <button class="ich-stepper-btn" onclick="stepVal('held', -1)">−</button>
+                        <input type="number" id="held" class="form-input" min="1" placeholder="e.g. 40" value="40" oninput="calculateAttendance()">
+                        <button class="ich-stepper-btn" onclick="stepVal('held', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="attended">Classes Attended</label>
+                    <div class="ich-stepper-wrap">
+                        <button class="ich-stepper-btn" onclick="stepVal('attended', -1)">−</button>
+                        <input type="number" id="attended" class="form-input" min="0" placeholder="e.g. 33" value="33" oninput="calculateAttendance()">
+                        <button class="ich-stepper-btn" onclick="stepVal('attended', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Target Percentage</label>
+                    <div class="target-options">
+                        <button class="target-btn active" onclick="setTarget(75, this)">75% (Min)</button>
+                        <button class="target-btn" onclick="setTarget(80, this)">80% (Safe)</button>
+                        <button class="target-btn" onclick="setTarget(85, this)">85% (Distinction)</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calc-card">
+                <div class="result-box">
+                    <div style="font-size: 0.85rem; font-weight: 600; color: var(--ich-text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Current Attendance</div>
+                    <div class="percent-display" id="current-percent">82.5%</div>
+                    
+                    <div>
+                        <span class="status-badge status-good" id="status-pill">Eligible for Exams</span>
+                    </div>
+
+                    <div class="ich-progress-track">
+                        <div class="ich-progress-fill" id="progress-bar-fill" style="width: 82.5%; background-color: var(--ich-success);"></div>
+                    </div>
+
+                    <div class="verdict-text" id="verdict-message">
+                        You can safely bunk <strong>4</strong> more classes without falling below your 75% target!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="ich-footer-mount"></div>
+
+<script src="incloud-shell.js"></script>
+<script>
+    renderGlobalNav('attendance');
+    renderBreadcrumbs([
+        { label: 'Home', url: 'home.html' },
+        { label: 'Attendance Tracker', url: 'attendance.html' }
+    ]);
+    renderGlobalFooter('ich-footer-mount');
+
+    let currentTarget = 75;
+
+    function stepVal(id, delta) {
+        const el = document.getElementById(id);
+        let val = parseInt(el.value, 10) || 0;
+        val = Math.max(0, val + delta);
+        if (id === 'held' && val < 1) val = 1;
+        el.value = val;
+        calculateAttendance();
+    }
+
+    function setTarget(pct, btn) {
+        currentTarget = pct;
+        document.querySelectorAll('.target-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        calculateAttendance();
+    }
+
+    function calculateAttendance() {
+        const held = parseInt(document.getElementById('held').value, 10);
+        const attended = parseInt(document.getElementById('attended').value, 10);
+
+        const percentEl = document.getElementById('current-percent');
+        const statusPill = document.getElementById('status-pill');
+        const verdictEl = document.getElementById('verdict-message');
+        const progressFill = document.getElementById('progress-bar-fill');
+
+        if (isNaN(held) || isNaN(attended) || held <= 0 || attended < 0) {
+            percentEl.textContent = '--%';
+            verdictEl.textContent = 'Please enter valid positive numbers for classes held and attended.';
+            progressFill.style.width = '0%';
+            return;
+        }
+
+        if (attended > held) {
+            percentEl.textContent = '--%';
+            verdictEl.textContent = 'Attended classes cannot exceed total classes held.';
+            progressFill.style.width = '0%';
+            return;
+        }
+
+        const currentPct = (attended / held) * 100;
+        percentEl.textContent = currentPct.toFixed(1) + '%';
+        progressFill.style.width = Math.min(100, currentPct) + '%';
+
+        const targetDecimal = currentTarget / 100;
+
+        if (currentPct >= currentTarget) {
+            statusPill.className = 'status-badge status-good';
+            statusPill.textContent = 'Eligible for Exams';
+            progressFill.style.backgroundColor = 'var(--ich-success)';
+
+            const maxTotalClasses = Math.floor(attended / targetDecimal);
+            const bunks = maxTotalClasses - held;
+
+            if (bunks > 0) {
+                verdictEl.innerHTML = `🎉 You are currently on track! You can safely bunk <strong>${bunks}</strong> more class${bunks > 1 ? 'es' : ''} while staying above <strong>${currentTarget}%</strong>.`;
+            } else {
+                verdictEl.innerHTML = `⚠️ You are currently exactly at target. If you miss your next class, your attendance will drop below <strong>${currentTarget}%</strong>.`;
+            }
+        } else {
+            statusPill.className = currentPct >= 65 ? 'status-badge status-warning' : 'status-badge status-danger';
+            statusPill.textContent = currentPct >= 65 ? 'Condonation Zone' : 'Shortage / Detained';
+            progressFill.style.backgroundColor = currentPct >= 65 ? 'var(--ich-warning)' : 'var(--ich-danger)';
+
+            const required = Math.ceil((targetDecimal * held - attended) / (1 - targetDecimal));
+            verdictEl.innerHTML = `🚨 You are below <strong>${currentTarget}%</strong>! You must attend the next <strong>${required}</strong> consecutive class${required > 1 ? 'es' : ''} without missing any to regain eligibility.`;
+        }
+    }
+
+    calculateAttendance();
+</script>
+
+</body>
+</html>

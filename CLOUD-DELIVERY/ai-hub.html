@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Hub — Campus AI Tools & Prompts — MEDHAS</title>
+    <link rel="stylesheet" href="incloud-design.css">
+    <script src="auth.js"></script>
+    <script>requireAuth();</script>
+    <style>
+        .page-header {
+            max-width: 700px;
+            margin-bottom: 28px;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #FFF;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .page-title span {
+            color: var(--ich-primary);
+        }
+
+        .page-desc {
+            color: var(--ich-text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Starter Prompts Box */
+        .prompts-banner {
+            background: var(--ich-surface-1);
+            border: 1px solid var(--ich-border-accent);
+            border-radius: var(--ich-radius-xl);
+            padding: 24px 28px;
+            margin-bottom: 32px;
+        }
+
+        .prompts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .prompt-chip {
+            background: var(--ich-surface-2);
+            border: 1px solid var(--ich-border-medium);
+            border-radius: var(--ich-radius-md);
+            padding: 12px 14px;
+            cursor: pointer;
+            transition: all var(--ich-transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 0.82rem;
+            color: #FFF;
+        }
+
+        .prompt-chip:hover {
+            border-color: var(--ich-primary);
+            background: var(--ich-surface-3);
+            transform: translateY(-2px);
+        }
+
+        .prompt-copy-icon {
+            color: var(--ich-primary);
+            font-size: 11px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .category-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            margin-bottom: 28px;
+        }
+
+        .category-chip {
+            padding: 8px 18px;
+            border-radius: var(--ich-radius-full);
+            background: var(--ich-surface-1);
+            border: 1px solid var(--ich-border-subtle);
+            color: var(--ich-text-secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all var(--ich-transition-fast);
+            min-height: 38px;
+        }
+
+        .category-chip:hover, .category-chip.active {
+            background: var(--ich-primary-light);
+            border-color: var(--ich-primary);
+            color: var(--ich-primary);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 18px;
+            margin-bottom: 40px;
+        }
+
+        .tool-card {
+            background: var(--ich-surface-1);
+            border: 1px solid var(--ich-border-subtle);
+            border-radius: var(--ich-radius-lg);
+            padding: 24px;
+            text-decoration: none;
+            color: #FFF;
+            transition: all var(--ich-transition-base);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .tool-card:hover {
+            border-color: var(--ich-border-accent);
+            transform: translateY(-3px);
+            box-shadow: var(--ich-shadow-md), var(--ich-shadow-glow);
+            background: var(--ich-surface-2);
+        }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .tool-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--ich-radius-md);
+            background: var(--ich-surface-2);
+            border: 1px solid var(--ich-border-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        .tool-name {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #FFF;
+            margin-bottom: 4px;
+        }
+
+        .tool-desc {
+            font-size: 0.85rem;
+            color: var(--ich-text-secondary);
+            line-height: 1.5;
+            margin-bottom: 18px;
+        }
+
+        .tool-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--ich-primary);
+            border-top: 1px solid var(--ich-border-subtle);
+            padding-top: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="ich-page-wrapper">
+    <div class="ich-container">
+        
+        <div id="ich-breadcrumbs-mount"></div>
+
+        <div class="page-header">
+            <h1 class="page-title">Campus <span>AI Hub</span></h1>
+            <p class="page-desc">Curated AI tools and pre-tested prompts to help you debug code, generate revision audio guides, extract research citations, and format technical reports.</p>
+        </div>
+
+        <!-- Copyable Student Prompts -->
+        <div class="prompts-banner">
+            <div style="font-weight: 800; color: #FFF; font-size: 1rem; display: flex; align-items: center; gap: 8px;">
+                <span>💡</span> Instant College Study Prompts (Click to Copy)
+            </div>
+            <div class="prompts-grid">
+                <div class="prompt-chip" onclick="copyPromptText('Explain this algorithm step-by-step with time complexity and a dry-run table: ', this)">
+                    <span>“Explain this algorithm step-by-step with time complexity...”</span>
+                    <span class="prompt-copy-icon">Copy 📋</span>
+                </div>
+                <div class="prompt-chip" onclick="copyPromptText('Generate 5 most expected 10-mark examination questions and model answers for this topic: ', this)">
+                    <span>“Generate 5 most expected 10-mark exam questions...”</span>
+                    <span class="prompt-copy-icon">Copy 📋</span>
+                </div>
+                <div class="prompt-chip" onclick="copyPromptText('Find the logical bug in this code and provide the corrected optimized snippet: ', this)">
+                    <span>“Find the bug in this code and provide optimized version...”</span>
+                    <span class="prompt-copy-icon">Copy 📋</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-nav">
+            <button class="category-chip active" onclick="filterCategory('all', this)">All Tools</button>
+            <button class="category-chip" onclick="filterCategory('study', this)">📚 Study & Notes</button>
+            <button class="category-chip" onclick="filterCategory('coding', this)">💻 Coding & Debugging</button>
+            <button class="category-chip" onclick="filterCategory('research', this)">🔬 Research Papers</button>
+            <button class="category-chip" onclick="filterCategory('writing', this)">✍️ Technical Writing</button>
+        </div>
+
+        <div class="tools-grid" id="tools-grid">
+            <a href="https://notebooklm.google.com" target="_blank" rel="noopener noreferrer" class="tool-card" data-category="study">
+                <div>
+                    <div class="tool-header">
+                        <div class="tool-icon">📓</div>
+                        <span class="ich-badge ich-badge-orange">Study Audio</span>
+                    </div>
+                    <div class="tool-name">Google NotebookLM</div>
+                    <div class="tool-desc">Upload syllabus PDFs and lecture notes to generate instant audio study podcasts, quizzes, and concept summaries.</div>
+                </div>
+                <div class="tool-footer">
+                    <span>Open NotebookLM</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                </div>
+            </a>
+
+            <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="tool-card" data-category="study writing coding">
+                <div>
+                    <div class="tool-header">
+                        <div class="tool-icon">🤖</div>
+                        <span class="ich-badge ich-badge-orange">General Tutor</span>
+                    </div>
+                    <div class="tool-name">ChatGPT</div>
+                    <div class="tool-desc">Multipurpose AI for problem solving, exam preparation, mathematics derivation, and essay structuring.</div>
+                </div>
+                <div class="tool-footer">
+                    <span>Open ChatGPT</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                </div>
+            </a>
+
+            <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="tool-card" data-category="coding study">
+                <div>
+                    <div class="tool-header">
+                        <div class="tool-icon">🧠</div>
+                        <span class="ich-badge ich-badge-orange">Logic & Code</span>
+                    </div>
+                    <div class="tool-name">Claude AI</div>
+                    <div class="tool-desc">Exceptional analytical reasoning and clean code generation for complex programming assignments and algorithms.</div>
+                </div>
+                <div class="tool-footer">
+                    <span>Open Claude</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                </div>
+            </a>
+
+            <a href="https://perplexity.ai" target="_blank" rel="noopener noreferrer" class="tool-card" data-category="research study">
+                <div>
+                    <div class="tool-header">
+                        <div class="tool-icon">🔍</div>
+                        <span class="ich-badge ich-badge-orange">Real-Time Search</span>
+                    </div>
+                    <div class="tool-name">Perplexity AI</div>
+                    <div class="tool-desc">Real-time academic search engine that provides cited answers, peer-reviewed sources, and verified references.</div>
+                </div>
+                <div class="tool-footer">
+                    <span>Open Perplexity</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                </div>
+            </a>
+
+            <a href="https://consensus.app" target="_blank" rel="noopener noreferrer" class="tool-card" data-category="research">
+                <div>
+                    <div class="tool-header">
+                        <div class="tool-icon">📑</div>
+                        <span class="ich-badge ich-badge-orange">200M+ Papers</span>
+                    </div>
+                    <div class="tool-name">Consensus AI</div>
+                    <div class="tool-desc">AI search engine extracting scientific consensus from peer-reviewed research papers for college projects.</div>
+                </div>
+                <div class="tool-footer">
+                    <span>Open Consensus</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                </div>
+            </a>
+
+            <a href="https://v0.dev" target="_blank" rel="noopener noreferrer" class="tool-card" data-category="coding">
+                <div>
+                    <div class="tool-header">
+                        <div class="tool-icon">⚡</div>
+                        <span class="ich-badge ich-badge-orange">UI Builder</span>
+                    </div>
+                    <div class="tool-name">v0.dev by Vercel</div>
+                    <div class="tool-desc">Generative UI builder that transforms plain text prompts into clean, production-ready frontend code.</div>
+                </div>
+                <div class="tool-footer">
+                    <span>Open v0</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                </div>
+            </a>
+
+            <a href="https://quillbot.com" target="_blank" rel="noopener noreferrer" class="tool-card" data-category="writing">
+                <div>
+                    <div class="tool-header">
+                        <div class="tool-icon">✍️</div>
+                        <span class="ich-badge ich-badge-gray">Paraphrasing</span>
+                    </div>
+                    <div class="tool-name">QuillBot</div>
+                    <div class="tool-desc">Paraphrasing, grammar check, and citation generator for technical project reports and documentation.</div>
+                </div>
+                <div class="tool-footer">
+                    <span>Open QuillBot</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<div id="ich-footer-mount"></div>
+
+<script src="incloud-shell.js"></script>
+<script>
+    renderGlobalNav('ai');
+    renderBreadcrumbs([
+        { label: 'Home', url: 'home.html' },
+        { label: 'AI Hub', url: 'ai-hub.html' }
+    ]);
+    renderGlobalFooter('ich-footer-mount');
+
+    function filterCategory(cat, el) {
+        document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
+        if (el) el.classList.add('active');
+
+        const cards = document.querySelectorAll('.tool-card');
+        cards.forEach(card => {
+            const categories = (card.getAttribute('data-category') || '').split(' ');
+            if (cat === 'all' || categories.includes(cat)) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    function copyPromptText(text, el) {
+        navigator.clipboard.writeText(text).then(() => {
+            const icon = el.querySelector('.prompt-copy-icon');
+            if (icon) {
+                const prev = icon.textContent;
+                icon.textContent = 'Copied! ✓';
+                setTimeout(() => icon.textContent = prev, 2000);
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

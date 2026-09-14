@@ -1,0 +1,248 @@
+/* ==========================================================================
+   MEDHAS — THE LIVING KNOWLEDGE INTERFACE STYLES
+   ========================================================================== */
+
+/* Full-Screen Canvas */
+.medhas-knowledge-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 1;
+  pointer-events: none;
+  display: block;
+}
+
+/* Atmospheric Ambient Vignette */
+.medhas-atmosphere-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(11, 13, 17, 0) 30%, rgba(11, 13, 17, 0.75) 100%);
+}
+
+/* Full Viewport Container (No split boxes) */
+.medhas-login-viewport {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  padding: 48px 8vw;
+  box-sizing: border-box;
+}
+
+/* Transparent Floating Auth Interface */
+.medhas-floating-auth {
+  width: 100%;
+  max-width: 440px;
+  background: transparent;
+  padding: 0;
+  position: relative;
+}
+
+/* Minimal Brand Header */
+.medhas-auth__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.medhas-auth__logo-emblem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(247, 140, 37, 0.14);
+  border: 1px solid rgba(247, 140, 37, 0.4);
+  color: #F78C25;
+  box-shadow: 0 0 20px rgba(247, 140, 37, 0.25);
+}
+
+.medhas-auth__brand-name {
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #EEF0F4;
+}
+
+.medhas-auth__brand-name span {
+  color: #F78C25;
+}
+
+.medhas-auth__title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  margin: 0 0 8px 0;
+}
+
+.medhas-auth__subtitle {
+  font-size: 0.92rem;
+  color: #94A3B8;
+  margin: 0 0 32px 0;
+  line-height: 1.5;
+}
+
+/* Minimalist Form Controls */
+.medhas-field-group {
+  margin-bottom: 22px;
+  position: relative;
+}
+
+.medhas-field-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #CBD5E1;
+  margin-bottom: 8px;
+}
+
+.medhas-input-field {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 13px 16px;
+  color: #FFF;
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.medhas-input-field::placeholder {
+  color: #64748B;
+}
+
+.medhas-input-field:focus {
+  background: rgba(247, 140, 37, 0.05);
+  border-color: rgba(247, 140, 37, 0.4);
+  border-bottom-color: #F78C25;
+  box-shadow: 0 4px 24px rgba(247, 140, 37, 0.18);
+}
+
+.medhas-select-field {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23F78C25' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}
+
+.medhas-select-field option {
+  background: #10131A;
+  color: #FFF;
+}
+
+.medhas-error-text {
+  color: #EF4444;
+  font-size: 0.8rem;
+  margin-top: 6px;
+  display: none;
+}
+
+/* Integrated Continue Action Button */
+.medhas-submit-action {
+  width: 100%;
+  padding: 14px 22px;
+  background: linear-gradient(135deg, #F78C25 0%, #EA7612 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 24px rgba(247, 140, 37, 0.35);
+}
+
+.medhas-submit-action:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #FFA34D 0%, #F78C25 100%);
+  box-shadow: 0 8px 32px rgba(247, 140, 37, 0.55);
+}
+
+.medhas-submit-action:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Secondary Admin Link */
+.medhas-admin-access {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  color: #94A3B8;
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.medhas-admin-access:hover {
+  color: #F78C25;
+}
+
+.medhas-footer-meta {
+  text-align: center;
+  color: #64748B;
+  font-size: 0.74rem;
+  margin-top: 26px;
+  letter-spacing: 0.04em;
+}
+
+/* Responsive: Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+  .medhas-login-viewport {
+    padding: 40px 6vw;
+  }
+}
+
+/* Responsive: Mobile (< 768px) */
+@media (max-width: 768px) {
+  .medhas-login-viewport {
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 24vh 20px 40px 20px;
+    min-height: 100vh;
+  }
+
+  .medhas-floating-auth {
+    max-width: 100%;
+  }
+
+  .medhas-auth__title {
+    font-size: 1.55rem;
+  }
+
+  .medhas-auth__subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 380px) {
+  .medhas-login-viewport {
+    padding: 22vh 16px 32px 16px;
+  }
+}
+
+
